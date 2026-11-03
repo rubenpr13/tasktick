@@ -26,6 +26,7 @@ No hay tests ni linter configurados.
 - `src/main.jsx`: monta `<App />`
 - `.mcp.json`: servidores MCP de Claude Code (ahora `chrome-devtools`, para abrir y probar la app en Chrome). Es personal: está en `.gitignore` y no se sube (decidido por Rubén el 2026-11-03)
 - `.claude/skills/design-taste-frontend/`: skill de diseño de Claude Code (de `Leonxlnx/taste-skill`, instalada por Rubén el 2026-11-03; su origen está en `skills-lock.json`). Sus archivos de trabajo van a `.taste-skill/`, que está en `.gitignore`. Usarla no autoriza a cambiar el diseño aprobado: cualquier propuesta suya se pregunta antes a Rubén
+- `.claude/skills/frontend-design/`: skill de diseño de Anthropic (de `anthropics/skills`, instalada por Rubén el 2026-11-03; también en `skills-lock.json`). Es la que se usó para planear el diseño "cuaderno + subrayador". Igual que la anterior, no autoriza a cambiar el diseño aprobado sin preguntar
 
 ## Reglas del temporizador (no cambiarlas sin pedirlo)
 - La columna del reloj se titula "Temporizador" (cambiado por Rubén el 2026-11-03; antes "Study App"). El nombre de la app, "TaskTick", solo sale en la pestaña del navegador.

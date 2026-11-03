@@ -78,6 +78,10 @@ Registro de lo que se ha hecho en TaskTick (antes Study App) y de las decisiones
 - No cambia nada de la app. El diseño "cuaderno + subrayador" sigue siendo el aprobado.
 - Después, a petición de Rubén: `.taste-skill/` añadido a `.gitignore`, y la skill anotada en `CLAUDE.md` (en *Estructura*, con la regla de no cambiar el diseño aprobado sin preguntar, y en la lista de lo que nunca se sube).
 
+### 2026-11-03: Skill de diseño frontend-design
+- En la sesión del rediseño se usó con `npx skills use`, que no la instala; por eso no estaba en `.claude/skills`. A petición de Rubén se instala con `npx skills add https://github.com/anthropics/skills --skill frontend-design` en `.claude/skills/frontend-design/` y queda añadida a `skills-lock.json`.
+- Revisada: solo tiene `SKILL.md` (instrucciones de texto) y la licencia, sin scripts. El instalador la marca como segura ("Safe" en Gen, "Low Risk" en Snyk). Anotada en `CLAUDE.md`, en *Estructura*.
+
 ## Decisiones pendientes de revisar
 Las tomé yo porque el encargo no las especificaba:
 - [x] Al terminar el descanso largo se vuelve a Concentración. Confirmado por Rubén el 2026-11-03.
