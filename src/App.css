@@ -31,6 +31,7 @@
   --margen: #e7a3a3; /* línea de margen del cuaderno */
   --cuadro: 20px; /* tamaño de un cuadro de la hoja */
   --subrayador: #ffe14d; /* cambia según el modo (ver más abajo) */
+  --subrayador-foco: #ffe14d; /* el amarillo de Concentración, fijo: lo usa el mapa de calor */
 
   --fuente-texto: "Atkinson Hyperlegible Next", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   /* Lexend para los números: Atkinson tacha siempre el cero (Ø) y en el reloj grande "00" parecía "ØØ" */
@@ -418,6 +419,136 @@ input:focus-visible {
 
 .tarea-borrar:hover {
   color: var(--boli-rojo);
+}
+
+/* ----- Constancia: racha y mapa de calor, debajo y a todo el ancho de la hoja ----- */
+.constancia {
+  max-width: 1000px; /* el mismo ancho que la hoja */
+  margin: calc(var(--cuadro) * 3) auto 0;
+  padding-top: calc(var(--cuadro) * 2 - 2px); /* - 2px de la línea, para seguir encajando en los cuadros */
+  border-top: 2px solid var(--margen);
+}
+
+/* Título y racha en el mismo renglón */
+.constancia-cabecera {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: calc(var(--cuadro) * 2);
+  margin-bottom: var(--cuadro);
+}
+
+.constancia-cabecera .titulo {
+  margin: 0;
+}
+
+.racha {
+  margin: 0;
+  color: var(--tinta-suave);
+}
+
+.racha strong {
+  font-family: var(--fuente-reloj);
+  font-variant-numeric: tabular-nums;
+  color: var(--tinta);
+}
+
+/* Si el año no cabe a lo ancho, el mapa se desplaza de lado dentro de su marco */
+.mapa-marco {
+  overflow-x: auto;
+}
+
+.mapa-marco:focus-visible {
+  outline: 2px solid var(--tinta);
+  outline-offset: 2px;
+}
+
+/* Cada día es un cuadro de la hoja: una columna por semana y una fila por día (de lunes a domingo).
+   La primera fila es para los meses y la primera columna para las letras de los días */
+.mapa {
+  display: grid;
+  grid-template-columns: repeat(54, var(--cuadro));
+  grid-template-rows: repeat(8, var(--cuadro));
+  width: max-content;
+}
+
+.mapa-mes,
+.mapa-dia-semana {
+  font-size: 13px;
+  color: var(--tinta-suave);
+  white-space: nowrap;
+}
+
+.mapa-mes {
+  grid-row: 1;
+}
+
+.mapa-dia-semana {
+  grid-column: 1;
+  /* Las letras de los días se quedan fijas a la izquierda al desplazar el mapa */
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: var(--papel);
+}
+
+/* Un día: un cuadro un poco más pequeño que el de la hoja. Sin estudio, un gris muy suave */
+.dia {
+  margin: 2px;
+  border-radius: 3px;
+  background: rgba(30, 42, 58, 0.07);
+  cursor: pointer;
+}
+
+/* Cuantos más minutos de concentración, más intenso el amarillo del subrayador */
+.dia.nivel-1 { background: color-mix(in srgb, var(--subrayador-foco) 35%, transparent); }
+.dia.nivel-2 { background: color-mix(in srgb, var(--subrayador-foco) 60%, transparent); }
+.dia.nivel-3 { background: color-mix(in srgb, var(--subrayador-foco) 85%, transparent); }
+.dia.nivel-4 { background: var(--subrayador-foco); }
+
+/* Hoy, con borde de tinta */
+.dia.hoy {
+  border: 2px solid var(--tinta);
+}
+
+/* El día cuyo dato se lee debajo */
+.dia.elegido {
+  outline: 2px solid var(--tinta-suave);
+  outline-offset: 1px;
+}
+
+/* Los días que aún no han llegado (en la semana actual) no se ven */
+.dia.futuro {
+  visibility: hidden;
+}
+
+/* Debajo del mapa: el dato del día elegido a la izquierda y la leyenda a la derecha */
+.constancia-pie {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px var(--cuadro);
+  margin-top: var(--cuadro);
+}
+
+.mapa-dato,
+.leyenda {
+  margin: 0;
+}
+
+.leyenda {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  color: var(--tinta-suave);
+}
+
+.leyenda .dia {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  cursor: default;
 }
 
 /* ----- Ordenador: reloj a la izquierda y tareas a la derecha, con la línea de margen en medio ----- */

@@ -1,4 +1,4 @@
-import { PRESETS, DESCANSO_LARGO } from "./config.js";
+import { PRESETS, DESCANSO_LARGO, TRAMOS_MINUTOS } from "./config.js";
 
 // ----- Funciones de ayuda -----
 
@@ -18,12 +18,80 @@ export function formatearTiempo(segundos) {
   return `${String(minutos).padStart(2, "0")}:${String(resto).padStart(2, "0")}`;
 }
 
-// Devuelve la fecha de hoy como texto "AAAA-MM-DD", con la hora local del usuario (nunca UTC)
+// Convierte minutos en texto: 45 -> "45 min", 60 -> "1 h", 75 -> "1 h 15 min"
+export function formatearMinutos(minutos) {
+  const horas = Math.floor(minutos / 60);
+  const resto = Math.round(minutos % 60);
+  if (horas === 0) return `${resto} min`;
+  if (resto === 0) return `${horas} h`;
+  return `${horas} h ${resto} min`;
+}
+
+// ----- Fechas -----
+// Las fechas se guardan como texto "AAAA-MM-DD" con la hora local del usuario (nunca UTC)
+
+// Convierte una fecha de JavaScript en texto "AAAA-MM-DD"
+export function textoDeFecha(fecha) {
+  const mes = String(fecha.getMonth() + 1).padStart(2, "0");
+  const dia = String(fecha.getDate()).padStart(2, "0");
+  return `${fecha.getFullYear()}-${mes}-${dia}`;
+}
+
+// Convierte un texto "AAAA-MM-DD" en una fecha de JavaScript (ese día a las 00:00, hora local)
+export function leerFecha(texto) {
+  const [anio, mes, dia] = texto.split("-").map(Number);
+  return new Date(anio, mes - 1, dia);
+}
+
+// Devuelve la fecha de hoy como texto "AAAA-MM-DD"
 export function fechaDeHoy() {
-  const ahora = new Date();
-  const mes = String(ahora.getMonth() + 1).padStart(2, "0");
-  const dia = String(ahora.getDate()).padStart(2, "0");
-  return `${ahora.getFullYear()}-${mes}-${dia}`;
+  return textoDeFecha(new Date());
+}
+
+// Suma (o resta, con un número negativo) días a una fecha "AAAA-MM-DD"
+export function sumarDias(texto, dias) {
+  const fecha = leerFecha(texto);
+  fecha.setDate(fecha.getDate() + dias);
+  return textoDeFecha(fecha);
+}
+
+// ----- Constancia: rachas y tonos del mapa de calor -----
+
+// Calcula la racha actual y la mejor racha (días seguidos con al menos una concentración terminada)
+export function calcularRachas(historial) {
+  const estudioEse = (fecha) => (historial[fecha]?.foco ?? 0) > 0;
+
+  // Racha actual: se cuenta hacia atrás desde hoy. Si hoy aún no has estudiado, desde ayer
+  // (la racha no se rompe hasta que acaba el día)
+  const hoy = fechaDeHoy();
+  let dia = estudioEse(hoy) ? hoy : sumarDias(hoy, -1);
+  let actual = 0;
+  while (estudioEse(dia)) {
+    actual += 1;
+    dia = sumarDias(dia, -1);
+  }
+
+  // Mejor racha: se recorren en orden los días con estudio y se cuentan los que van seguidos
+  const diasConEstudio = Object.keys(historial).filter(estudioEse).sort();
+  let mejor = 0;
+  let seguidos = 0;
+  let anterior = null;
+  for (const fecha of diasConEstudio) {
+    seguidos = anterior !== null && sumarDias(anterior, 1) === fecha ? seguidos + 1 : 1;
+    mejor = Math.max(mejor, seguidos);
+    anterior = fecha;
+  }
+
+  return { actual, mejor };
+}
+
+// Tono del mapa de calor (de 0 a 4) según los minutos de concentración de un día
+export function nivelDeMinutos(minutos) {
+  if (minutos <= 0) return 0;
+  if (minutos < TRAMOS_MINUTOS[0]) return 1;
+  if (minutos < TRAMOS_MINUTOS[1]) return 2;
+  if (minutos < TRAMOS_MINUTOS[2]) return 3;
+  return 4;
 }
 
 // ----- Guardar datos en el navegador (localStorage) -----

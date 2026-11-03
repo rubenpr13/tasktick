@@ -33,8 +33,17 @@ export const NOMBRES_MODO = {
 export const CLAVES_GUARDADO = {
   tareas: "tasktick-tareas",
   tiempos: "tasktick-tiempos-personalizados",
-  historial: "tasktick-historial", // sesiones terminadas de cada día: { "2026-11-03": { foco: 3, ... } }
+  historial: "tasktick-historial", // sesiones de cada día: { "2026-11-03": { foco: 3, ..., minutosFoco: 75 } }
 };
+
+// ----- Configuración de la constancia (racha y mapa de calor) -----
+
+// Semanas que muestra el mapa de calor (un año, como GitHub)
+export const SEMANAS_MAPA = 53;
+
+// Minutos de concentración al día que separan los tonos del mapa:
+// menos de 1 h, de 1 a 2 h, de 2 a 3 h y 3 h o más
+export const TRAMOS_MINUTOS = [60, 120, 180];
 
 // ----- Configuración de la lista de tareas -----
 

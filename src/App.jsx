@@ -9,6 +9,7 @@ import Controles from "./components/Controles.jsx";
 import SelectorPreset from "./components/SelectorPreset.jsx";
 import VentanaPersonalizar from "./components/VentanaPersonalizar.jsx";
 import ListaTareas from "./components/ListaTareas.jsx";
+import Constancia from "./components/Constancia.jsx";
 
 // ----- Componente principal -----
 // Obtiene los datos y las acciones del reloj (usePomodoro) y de las tareas (useTareas)
@@ -21,6 +22,7 @@ export default function App() {
     segundosRestantes,
     enMarcha,
     sesiones,
+    historial,
     tiemposPersonalizados,
     alternarPlayPausa,
     detener,
@@ -90,6 +92,8 @@ export default function App() {
           onBorrar={borrarTarea}
         />
       </div>
+
+      <Constancia historial={historial} />
 
       {/* La ventana se abre con los últimos tiempos guardados (al principio 25 / 5 / 30) */}
       {ventanaAbierta && (

@@ -4,7 +4,7 @@ import { fechaDeHoy, guardar, leerGuardado, obtenerDuracion } from "../utilidade
 import { prepararSonido, sonarCampanita } from "../sonido.js";
 
 // Sesiones de un día en el que aún no se ha terminado ninguna
-const SIN_SESIONES = { foco: 0, descansoCorto: 0, descansoLargo: 0 };
+const SIN_SESIONES = { foco: 0, descansoCorto: 0, descansoLargo: 0, minutosFoco: 0 };
 
 // ----- Hook del temporizador Pomodoro -----
 // Un hook es una función que empieza por "use" y agrupa estado y efectos de React.
@@ -15,8 +15,9 @@ export default function usePomodoro() {
   const [modo, setModo] = useState("foco");
   const [segundosRestantes, setSegundosRestantes] = useState(obtenerDuracion("foco", "corto"));
   const [enMarcha, setEnMarcha] = useState(false); // false = espera a que el usuario pulse Iniciar
-  // Historial guardado en el navegador: sesiones terminadas de cada día, por fecha local
-  // ({ "2026-11-03": { foco: 3, descansoCorto: 2, descansoLargo: 0 }, ... })
+  // Historial guardado en el navegador: sesiones terminadas de cada día, por fecha local,
+  // y los minutos de concentración de ese día (para el mapa de calor)
+  // ({ "2026-11-03": { foco: 3, descansoCorto: 2, descansoLargo: 0, minutosFoco: 75 }, ... })
   const [historial, setHistorial] = useState(() => leerGuardado(CLAVES_GUARDADO.historial, {}));
   // Los contadores de las pestañas muestran solo las sesiones de hoy (a medianoche vuelven a 0)
   const sesiones = historial[fechaDeHoy()] ?? SIN_SESIONES;
@@ -60,11 +61,16 @@ export default function usePomodoro() {
     // Aviso: suena una campanita
     sonarCampanita();
 
-    // Solo aquí se suma la sesión: cuando el temporizador ha terminado. Se apunta en el día de hoy
+    // Solo aquí se suma la sesión: cuando el temporizador ha terminado. Se apunta en el día de hoy.
+    // Si era de concentración, también se suman sus minutos (25, 50 o los personalizados)
+    const minutosSesion = modo === "foco" ? obtenerDuracion(modo, preset, tiemposPersonalizados) / 60 : 0;
     setHistorial((anterior) => {
       const hoy = fechaDeHoy();
-      const delDia = anterior[hoy] ?? SIN_SESIONES;
-      return { ...anterior, [hoy]: { ...delDia, [modo]: delDia[modo] + 1 } };
+      const delDia = { ...SIN_SESIONES, ...anterior[hoy] };
+      return {
+        ...anterior,
+        [hoy]: { ...delDia, [modo]: delDia[modo] + 1, minutosFoco: delDia.minutosFoco + minutosSesion },
+      };
     });
 
     // Concentración -> Descanso corto; cualquier descanso -> Concentración
@@ -116,6 +122,7 @@ export default function usePomodoro() {
     segundosRestantes,
     enMarcha,
     sesiones,
+    historial,
     tiemposPersonalizados,
     alternarPlayPausa,
     detener,
