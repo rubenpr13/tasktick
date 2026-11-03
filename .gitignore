@@ -9,3 +9,6 @@ dist/
 
 # Servidores MCP de Claude Code (configuración personal, no se sube)
 .mcp.json
+
+# Archivos de trabajo de la skill design-taste-frontend (capturas e informes)
+.taste-skill/

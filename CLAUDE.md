@@ -25,6 +25,7 @@ No hay tests ni linter configurados.
 - `index.html`: carga las fuentes de Google Fonts (Atkinson Hyperlegible Next y Lexend)
 - `src/main.jsx`: monta `<App />`
 - `.mcp.json`: servidores MCP de Claude Code (ahora `chrome-devtools`, para abrir y probar la app en Chrome). Es personal: está en `.gitignore` y no se sube (decidido por Rubén el 2026-11-03)
+- `.claude/skills/design-taste-frontend/`: skill de diseño de Claude Code (de `Leonxlnx/taste-skill`, instalada por Rubén el 2026-11-03; su origen está en `skills-lock.json`). Sus archivos de trabajo van a `.taste-skill/`, que está en `.gitignore`. Usarla no autoriza a cambiar el diseño aprobado: cualquier propuesta suya se pregunta antes a Rubén
 
 ## Reglas del temporizador (no cambiarlas sin pedirlo)
 - La columna del reloj se titula "Temporizador" (cambiado por Rubén el 2026-11-03; antes "Study App"). El nombre de la app, "TaskTick", solo sale en la pestaña del navegador.
@@ -61,7 +62,7 @@ No hay tests ni linter configurados.
 Repositorio público: https://github.com/rubenpr13/tasktick (rama `master`, remoto `origin`; antes se llamaba `study-app`).
 - **Subir siempre lo que se modifica (pedido por Rubén el 2026-10-29):** al terminar cada cambio que funcione, haz un commit y un `git push` sin esperar a que te lo pidan. No hace falta preguntar antes.
 - Un commit por cambio, con el mensaje en español, en imperativo y explicando qué se ha hecho.
-- Antes de cada commit, revisa `git status`: nunca subas `node_modules/`, `dist/`, `.claude/settings.local.json`, `.mcp.json` ni claves o contraseñas.
+- Antes de cada commit, revisa `git status`: nunca subas `node_modules/`, `dist/`, `.claude/settings.local.json`, `.mcp.json`, `.taste-skill/` ni claves o contraseñas.
 
 ## Segundo cerebro (vault de Obsidian)
 Vault: `C:\Users\ruben\iCloudDrive\iCloud~md~obsidian\Rpinazo`. Antes de escribir en él, lee su `AGENTS.md` y sigue sus reglas (plantilla, propiedades, carpetas sensibles…).

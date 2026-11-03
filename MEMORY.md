@@ -76,6 +76,7 @@ Registro de lo que se ha hecho en TaskTick (antes Study App) y de las decisiones
 - A petición de Rubén se instala la skill `design-taste-frontend` (repositorio `Leonxlnx/taste-skill`) solo en este proyecto, en `.claude/skills/design-taste-frontend/`. El instalador crea también `skills-lock.json` con su origen y su hash.
 - El instalador la marcó como "Critical Risk" (Gen) y "Med Risk" (Snyk). Revisé el código: sus scripts abren Chrome para hacer capturas y descargan imágenes de webs públicas (Openverse, Wikimedia, museos, NASA), sin claves ni nada sospechoso. Al usarse escribe en `.taste-skill/` del proyecto y en `~/.taste-skill/history.json`.
 - No cambia nada de la app. El diseño "cuaderno + subrayador" sigue siendo el aprobado.
+- Después, a petición de Rubén: `.taste-skill/` añadido a `.gitignore`, y la skill anotada en `CLAUDE.md` (en *Estructura*, con la regla de no cambiar el diseño aprobado sin preguntar, y en la lista de lo que nunca se sube).
 
 ## Decisiones pendientes de revisar
 Las tomé yo porque el encargo no las especificaba:
