@@ -19,7 +19,8 @@ No hay tests ni linter configurados.
 - `src/components/`: un archivo por cada parte de la interfaz (`PestanasModo`, `Temporizador`, `Controles`, `SelectorPreset`, `VentanaPersonalizar`, `CampoMinutos`, `ListaTareas`, `Tarea`). Muestran datos y avisan de los clics con props `onX` (por ejemplo `onCambiarModo`, decidido por Rubén el 2026-11-03). Solo tienen estado propio los que guardan lo que se va escribiendo: `VentanaPersonalizar` (antes de pulsar Guardar), `ListaTareas` (la tarea nueva antes de añadirla) y `Tarea` (si se está editando y el texto editado)
 - `src/config.js`: presets, duración del descanso largo, tiempos iniciales de Personalizado, límites de minutos, nombres de los modos y largo máximo de una tarea
 - `src/utilidades.js`: funciones de ayuda (`obtenerDuracion`, `formatearTiempo`)
-- `src/App.css`: todos los estilos; los colores son variables en `:root` y el acento cambia por modo (`.modo-foco`, `.modo-descansoCorto`, `.modo-descansoLargo`)
+- `src/App.css`: todos los estilos; los colores y medidas son variables en `:root` y el color del subrayador cambia por modo (`.modo-foco`, `.modo-descansoCorto`, `.modo-descansoLargo`)
+- `index.html`: carga las fuentes de Google Fonts (Atkinson Hyperlegible Next y Lexend)
 - `src/main.jsx`: monta `<App />`
 - `.mcp.json`: servidores MCP de Claude Code (ahora `chrome-devtools`, para abrir y probar la app en Chrome). Es personal: está en `.gitignore` y no se sube (decidido por Rubén el 2026-11-03)
 
@@ -36,13 +37,22 @@ No hay tests ni linter configurados.
 - Los contadores y los tiempos personalizados viven en memoria y no se guardan (confirmado por Rubén el 2026-11-03).
 
 ## Reglas de la lista de tareas (decididas por Rubén el 2026-11-03; no cambiarlas sin pedirlo)
-- Va en una tarjeta aparte, "Tareas": en el ordenador a la derecha del reloj y con el mismo ancho; en pantallas estrechas, debajo.
+- Va en una columna aparte, "Tareas": en el ordenador a la derecha del reloj, con el mismo ancho y separada por la línea de margen; en pantallas estrechas, debajo.
 - Añadir: campo "Nueva tarea…" y botón + (o Enter). Se quitan los espacios de los extremos, no se añaden tareas vacías y el máximo es 100 caracteres. La tarea nueva va al final.
 - Marcar como hecha con una casilla: la tarea se queda en su sitio, tachada y más clara.
 - Editar con doble clic en el texto: Enter o pulsar fuera guardan, Escape cancela. Si el texto queda vacío, vuelve el anterior.
 - Borrar con ×, al momento y sin confirmación.
 - Con la lista vacía se muestra "No hay tareas. Añade la primera."
 - Las tareas viven en memoria y se pierden al recargar. No hay contador de hechas ni relación con los pomodoros.
+
+## Diseño "cuaderno + subrayador" (aprobado por Rubén el 2026-11-03; no cambiarlo sin pedirlo)
+- La página es una hoja de cuaderno cuadriculado (cuadros de 20 px, `--cuadro`); todo va alineado a la izquierda y encaja en los cuadros. Sin tarjetas ni sombras.
+- Colores: papel `#F7F9FB`, cuadrícula `#D6E0EA`, tinta `#1E2A3A`, tinta suave `#5B6B7F`, boli rojo `#D64545` (tachado y ×), margen `#E7A3A3`. Subrayador por modo: Concentración `#FFE14D`, Descanso corto `#9BE7A0`, Descanso largo `#9CC9FF`; siempre detrás de texto oscuro, nunca como color de letra.
+- Fuentes de Google Fonts: Atkinson Hyperlegible Next para los textos y Lexend (800, cifras de ancho fijo) para el reloj y los campos de minutos. Atkinson tacha el cero y en el reloj grande no se leía bien (decidido por Rubén).
+- Lo llamativo es solo el reloj, con el trazo de subrayador detrás. Única animación: el subrayador se pinta de izquierda a derecha al cambiar de modo (no se anima si el sistema pide reducir el movimiento).
+- Pestañas y presets son palabras sueltas: la pestaña activa lleva el subrayador; el preset activo, un subrayado en tinta. Contador de sesiones: número pequeño en el mismo renglón. En el móvil (≤ 420 px) las pestañas van a 13 px para caber en una fila.
+- Botones con esquinas de 6 px: Play y + en bloque de tinta; Detener, ⚙ y Cancelar con borde de tinta. La ventana de Personalizar es una hoja cuadriculada con borde de tinta.
+- Tareas: casilla de un cuadro con ✓ en tinta; las hechas se tachan en boli rojo.
 
 ## Git y GitHub
 Repositorio público: https://github.com/rubenpr13/study-app (rama `master`, remoto `origin`).

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { LARGO_MAXIMO_TAREA } from "../config.js";
 import Tarea from "./Tarea.jsx";
 
-// Tarjeta con la lista de tareas: campo para añadir una nueva y la lista.
+// Columna con la lista de tareas: campo para añadir una nueva y la lista.
 // Props:
 // - tareas: lista de tareas ({ id, texto, hecha })
 // - onAnadir: función que se llama con el texto de la tarea nueva
@@ -23,7 +23,7 @@ export default function ListaTareas({ tareas, onAnadir, onAlternarHecha, onEdita
   }
 
   return (
-    <section className="tarjeta tarjeta-tareas">
+    <section className="columna columna-tareas">
       <h2 className="titulo">Tareas</h2>
 
       <form className="tareas-formulario" onSubmit={anadir}>

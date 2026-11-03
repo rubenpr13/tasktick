@@ -15,13 +15,18 @@ Web para estudiar con la **técnica Pomodoro**: alterna bloques de concentració
 - **Descanso largo** de 30 minutos (en Corto y Largo), que solo se activa a mano desde su pestaña.
 - **Controles**: Play / Pausa, Detener (vuelve al inicio del modo actual) y ⚙ para personalizar los tiempos.
 - **Tiempos personalizados**: el botón ⚙ abre una ventana para elegir los minutos de concentración, descanso corto y descanso largo (de 1 a 120). Al guardar aparece el preset **Personalizado** con esos tiempos. No se guardan al recargar la página.
-- **Lista de tareas** en una tarjeta junto al reloj (debajo en el móvil): añade tareas con + o Enter, márcalas como hechas, edítalas con doble clic (Enter o pulsar fuera guarda, Escape cancela) y bórralas con ×. Las tareas no se guardan al recargar la página.
+- **Lista de tareas** en una columna junto al reloj (debajo en el móvil): añade tareas con + o Enter, márcalas como hechas, edítalas con doble clic (Enter o pulsar fuera guarda, Escape cancela) y bórralas con ×. Las tareas no se guardan al recargar la página.
+
+## Diseño
+
+Estilo de **cuaderno cuadriculado**: la página es una hoja de cuadros y el modo activo se marca con un trazo de subrayador detrás del tiempo (amarillo en Concentración, verde en Descanso corto y azul en Descanso largo). En el ordenador, el reloj y las tareas van en dos columnas separadas por la línea de margen del cuaderno; en el móvil, una debajo de otra.
 
 ## Tecnologías
 
 - [React 18](https://react.dev/)
 - [Vite 5](https://vite.dev/)
 - JavaScript y CSS, sin librerías adicionales
+- Fuentes [Atkinson Hyperlegible Next](https://fonts.google.com/specimen/Atkinson+Hyperlegible+Next) y [Lexend](https://fonts.google.com/specimen/Lexend), de Google Fonts
 
 ## Cómo ejecutarlo
 
@@ -71,7 +76,7 @@ study-app/
         ├── SelectorPreset.jsx  # Botones de los presets Corto, Largo y Personalizado
         ├── VentanaPersonalizar.jsx  # Ventana para personalizar los tiempos
         ├── CampoMinutos.jsx    # Campo de minutos con botones − y +
-        ├── ListaTareas.jsx     # Tarjeta de tareas: campo para añadir y lista
+        ├── ListaTareas.jsx     # Columna de tareas: campo para añadir y lista
         └── Tarea.jsx           # Una tarea: casilla, texto editable y botón ×
 ```
 

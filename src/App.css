@@ -1,17 +1,27 @@
-/* ----- Colores generales ----- */
+/* ===== Estilo "cuaderno + subrayador" =====
+   La app es una hoja de cuaderno cuadriculado (cuadros de 20 px) y el modo activo
+   se marca con un trazo de subrayador detrás del texto. Todo encaja en los cuadros. */
+
+/* ----- Colores y medidas ----- */
 :root {
-  --fondo: #f4f5f7;
-  --tarjeta: #ffffff;
-  --texto: #1f2430;
-  --texto-suave: #6b7280;
-  --borde: #e5e7eb;
-  --acento: #e2554a; /* cambia según el modo (ver más abajo) */
+  --papel: #f7f9fb;
+  --cuadricula: #d6e0ea;
+  --tinta: #1e2a3a; /* texto y botones, como un boli azul muy oscuro */
+  --tinta-suave: #5b6b7f;
+  --boli-rojo: #d64545; /* tachado de tareas y × */
+  --margen: #e7a3a3; /* línea de margen del cuaderno */
+  --cuadro: 20px; /* tamaño de un cuadro de la hoja */
+  --subrayador: #ffe14d; /* cambia según el modo (ver más abajo) */
+
+  --fuente-texto: "Atkinson Hyperlegible Next", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  /* Lexend para los números: Atkinson tacha siempre el cero (Ø) y en el reloj grande "00" parecía "ØØ" */
+  --fuente-reloj: "Lexend", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
-/* Color de acento de cada modo */
-.modo-foco { --acento: #e2554a; }
-.modo-descansoCorto { --acento: #2f9e8f; }
-.modo-descansoLargo { --acento: #4a6fe2; }
+/* Color del subrayador de cada modo. Siempre va detrás de texto oscuro, nunca como color de letra */
+.modo-foco { --subrayador: #ffe14d; }
+.modo-descansoCorto { --subrayador: #9be7a0; }
+.modo-descansoLargo { --subrayador: #9cc9ff; }
 
 * {
   box-sizing: border-box;
@@ -23,225 +33,388 @@ input {
   caret-color: auto;
 }
 
+/* La página entera es papel cuadriculado */
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  background: var(--fondo);
-  color: var(--texto);
+  font-family: var(--fuente-texto);
+  font-size: 16px;
+  line-height: var(--cuadro);
+  color: var(--tinta);
+  background-color: var(--papel);
+  background-image:
+    linear-gradient(var(--cuadricula) 1px, transparent 1px),
+    linear-gradient(90deg, var(--cuadricula) 1px, transparent 1px);
+  background-size: var(--cuadro) var(--cuadro);
 }
 
 button {
   font: inherit;
+  color: inherit;
   cursor: pointer;
 }
 
-button:focus-visible {
-  outline: 3px solid var(--acento);
+/* Foco visible con el teclado, en tinta (los subrayadores son demasiado claros) */
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--tinta);
   outline-offset: 2px;
 }
 
 /* ----- Estructura ----- */
-/* Las tarjetas van una al lado de la otra si caben; si no, una debajo de otra */
 .app {
   min-height: 100vh;
-  display: flex;
-  flex-wrap: wrap;
-  align-content: center;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 24px;
-  padding: 16px;
+  padding: calc(var(--cuadro) * 3) calc(var(--cuadro) * 2);
 }
 
-/* Las dos tarjetas tienen el mismo ancho */
-.tarjeta {
-  flex: 1 1 360px;
-  max-width: 480px;
-  background: var(--tarjeta);
-  border-radius: 24px;
-  padding: 32px 24px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-  text-align: center;
+/* En el móvil, una columna: el reloj arriba y las tareas debajo */
+.hoja {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: calc(var(--cuadro) * 3);
 }
 
 .titulo {
-  margin: 0 0 24px;
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: var(--texto-suave);
+  margin: 0 0 var(--cuadro);
+  font-size: 20px;
+  line-height: calc(var(--cuadro) * 2);
+  font-weight: 700;
 }
 
 /* ----- Pestañas de modo ----- */
 .pestanas {
   display: flex;
-  gap: 8px;
-  padding: 4px;
-  background: var(--fondo);
-  border-radius: 999px;
+  flex-wrap: wrap;
+  column-gap: var(--cuadro);
 }
 
 .pestana {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding: 10px 8px;
+  height: calc(var(--cuadro) * 2);
+  padding: 0 6px;
   border: none;
-  border-radius: 999px;
   background: transparent;
-  color: var(--texto-suave);
-  font-size: 0.85rem;
-  transition: background 0.2s, color 0.2s;
+  color: var(--tinta-suave);
 }
 
 .pestana:hover {
-  color: var(--texto);
+  color: var(--tinta);
 }
 
+/* La pestaña activa lleva un trazo de subrayador por la mitad de abajo del texto */
 .pestana.activa {
-  background: var(--acento);
-  color: #ffffff;
+  color: var(--tinta);
+  background-image: linear-gradient(var(--subrayador), var(--subrayador));
+  background-repeat: no-repeat;
+  background-size: 100% 55%;
+  background-position: 0 72%;
 }
 
+/* Número pequeño con las sesiones completadas, en el mismo renglón */
 .contador {
-  min-width: 22px;
-  padding: 2px 6px;
-  border-radius: 999px;
-  background: rgba(0, 0, 0, 0.08);
-  font-size: 0.75rem;
-  font-weight: 600;
-}
-
-.pestana.activa .contador {
-  background: rgba(255, 255, 255, 0.25);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--tinta-suave);
 }
 
 /* ----- Temporizador ----- */
 .tiempo {
-  margin: 40px 0;
-  font-size: clamp(4rem, 18vw, 6rem);
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-  color: var(--acento);
-  transition: color 0.2s;
+  margin: calc(var(--cuadro) * 2) 0;
+  font-family: var(--fuente-reloj);
+  font-size: clamp(80px, 24vw, 140px);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums; /* todas las cifras miden lo mismo: el tiempo no "baila" */
+  line-height: 1;
 }
 
-/* ----- Botones de control ----- */
+/* Los números con el trazo de subrayador detrás. Es lo único llamativo de la página */
+.tiempo-numeros {
+  position: relative;
+  isolation: isolate; /* el trazo queda detrás de los números pero delante del papel */
+  display: inline-block;
+  padding: 0 12px;
+}
+
+.tiempo-numeros::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 22% -4px 6% -2px;
+  background: var(--subrayador);
+  border-radius: 4px 10px 6px 12px; /* bordes irregulares, como un rotulador */
+  transform: rotate(-1deg);
+  transform-origin: left center;
+  animation: pintar-subrayado 0.5s ease-out;
+}
+
+/* Única animación de la app: el subrayador se pinta de izquierda a derecha al cambiar de modo */
+@keyframes pintar-subrayado {
+  from {
+    transform: rotate(-1deg) scaleX(0);
+  }
+  to {
+    transform: rotate(-1deg) scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tiempo-numeros::before {
+    animation: none;
+  }
+}
+
+/* ----- Botones ----- */
 .controles {
   display: flex;
-  gap: 12px;
-  justify-content: center;
-  margin-bottom: 32px;
+  gap: var(--cuadro);
+  margin-bottom: calc(var(--cuadro) * 2);
 }
 
 .boton {
-  min-width: 130px;
-  padding: 14px 24px;
-  border-radius: 14px;
-  font-weight: 600;
-  transition: transform 0.1s, opacity 0.2s;
+  height: calc(var(--cuadro) * 2);
+  padding: 0 var(--cuadro);
+  border: 2px solid var(--tinta);
+  border-radius: 6px;
+  font-weight: 700;
 }
 
 .boton:active {
-  transform: scale(0.97);
+  transform: translateY(1px);
 }
 
+/* Play: bloque de tinta */
 .boton-principal {
-  border: none;
-  background: var(--acento);
-  color: #ffffff;
+  min-width: 120px;
+  background: var(--tinta);
+  color: var(--papel);
 }
 
-.boton-principal:hover {
-  opacity: 0.9;
-}
-
+/* Detener y ⚙: solo el borde de tinta */
 .boton-secundario {
-  border: 1px solid var(--borde);
-  background: var(--tarjeta);
-  color: var(--texto);
+  background: var(--papel);
+  color: var(--tinta);
 }
 
 .boton-secundario:hover {
-  background: var(--fondo);
+  background: var(--cuadricula);
 }
 
-/* ----- Presets ----- */
+.boton-icono {
+  width: calc(var(--cuadro) * 2);
+  padding: 0;
+  font-size: 18px;
+}
+
+.boton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ----- Presets: palabras sueltas, el activo subrayado en tinta ----- */
 .presets {
   display: flex;
-  gap: 12px;
+  flex-wrap: wrap;
+  column-gap: var(--cuadro);
 }
 
 .preset {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 12px;
-  border: 1px solid var(--borde);
-  border-radius: 14px;
-  background: var(--tarjeta);
-  color: var(--texto);
-  transition: border-color 0.2s;
+  height: calc(var(--cuadro) * 2);
+  padding: 0 6px;
+  border: none;
+  background: transparent;
+  color: var(--tinta-suave);
 }
 
 .preset:hover {
-  border-color: var(--texto-suave);
+  color: var(--tinta);
 }
 
 .preset.activo {
-  border: 2px solid var(--acento);
-  padding: 11px; /* compensa el borde más grueso */
+  color: var(--tinta);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
+}
+
+/* ----- Lista de tareas ----- */
+.tareas-formulario {
+  display: flex;
+  gap: var(--cuadro);
+  margin-bottom: var(--cuadro);
+}
+
+.tareas-campo {
+  flex: 1;
+  min-width: 0;
+  height: calc(var(--cuadro) * 2);
+  padding: 0 12px;
+  border: 2px solid var(--tinta-suave);
+  border-radius: 6px;
+  background: var(--papel);
+  color: var(--tinta);
+  font: inherit;
+}
+
+.tareas-campo:focus {
+  border-color: var(--tinta);
+  outline: none;
+}
+
+.tareas-campo::placeholder {
+  color: var(--tinta-suave);
+}
+
+.tareas-anadir {
+  flex: none;
+  width: calc(var(--cuadro) * 2);
+  height: calc(var(--cuadro) * 2);
+  border: none;
+  border-radius: 6px;
+  background: var(--tinta);
+  color: var(--papel);
+  font-size: 22px;
+  line-height: 1;
+}
+
+.tareas-vacia {
+  margin: var(--cuadro) 0 0;
+  color: var(--tinta-suave);
+}
+
+.tareas-lista {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Cada tarea ocupa al menos 2 cuadros de alto */
+.tarea {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: calc(var(--cuadro) * 2);
+  padding: 10px 0;
+}
+
+/* Casilla de un cuadro, con un ✓ en tinta al marcarla */
+.tarea-casilla {
+  flex: none;
+  appearance: none;
+  width: var(--cuadro);
+  height: var(--cuadro);
+  margin: 0;
+  border: 2px solid var(--tinta);
+  border-radius: 3px;
+  background: var(--papel) center / 14px no-repeat;
+  cursor: pointer;
+}
+
+.tarea-casilla:checked {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M2 7.5l3.2 3.2L12 3.5' fill='none' stroke='%231e2a3a' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+.tarea-texto {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere; /* parte las palabras muy largas en vez de salirse */
+  touch-action: manipulation; /* evita que el doble toque haga zoom en el móvil */
+}
+
+/* Tarea hecha: tachada con boli rojo */
+.tarea.hecha .tarea-texto {
+  color: var(--tinta-suave);
+  text-decoration: line-through;
+  text-decoration-color: var(--boli-rojo);
+  text-decoration-thickness: 2px;
+}
+
+.tarea-campo {
+  flex: 1;
+  min-width: 0;
+  height: 28px;
+  padding: 0 8px;
+  border: 2px solid var(--tinta);
+  border-radius: 6px;
+  background: var(--papel);
+  color: var(--tinta);
+  font: inherit;
+}
+
+.tarea-campo:focus {
+  outline: none;
+}
+
+.tarea-borrar {
+  flex: none;
+  width: var(--cuadro);
+  height: var(--cuadro);
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--tinta-suave);
+  font-size: 20px;
+  line-height: 1;
+}
+
+.tarea-borrar:hover {
+  color: var(--boli-rojo);
+}
+
+/* ----- Ordenador: reloj a la izquierda y tareas a la derecha, con la línea de margen en medio ----- */
+@media (min-width: 860px) {
+  .hoja {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: calc(var(--cuadro) * 2);
+  }
+
+  .columna-tareas {
+    padding-left: calc(var(--cuadro) * 2);
+    border-left: 2px solid var(--margen);
+  }
 }
 
 /* ----- Móvil ----- */
 @media (max-width: 420px) {
+  .app {
+    padding: calc(var(--cuadro) * 2) var(--cuadro);
+  }
+
+  .hoja {
+    row-gap: calc(var(--cuadro) * 2);
+  }
+
+  /* Letra un poco más pequeña para que las tres pestañas quepan en una fila (desde 375 px de ancho) */
   .pestana {
-    flex-direction: column;
-    gap: 4px;
-    border-radius: 16px;
-    font-size: 0.75rem;
+    padding: 0 3px;
+    font-size: 13px;
   }
 
-  .pestanas {
-    border-radius: 20px;
+  .pestanas,
+  .presets {
+    column-gap: 8px;
   }
 
-  .boton {
+  .controles {
+    gap: 12px;
+  }
+
+  .boton-principal {
     min-width: 0;
     flex: 1;
   }
-
-  /* Los tres presets caben en una fila */
-  .preset {
-    padding: 12px 8px;
-    font-size: 0.85rem;
-  }
-
-  .preset.activo {
-    padding: 11px 7px; /* compensa el borde más grueso */
-  }
 }
 
-/* ----- Botón de personalizar (⚙) ----- */
-.boton-icono {
-  flex: none;
-  min-width: 0;
-  padding: 14px 18px;
-  font-size: 1.1rem;
-  line-height: 1;
-}
-
-/* ----- Ventana de personalizar ----- */
+/* ----- Ventana de personalizar: una hoja de papel con borde de tinta ----- */
 .fondo-ventana {
   position: fixed;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 16px;
-  background: rgba(31, 36, 48, 0.45);
+  padding: var(--cuadro);
+  background: rgba(30, 42, 58, 0.4);
   z-index: 10;
 }
 
@@ -252,24 +425,28 @@ button:focus-visible {
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding: 28px 24px 24px;
-  border-radius: 24px;
-  background: var(--tarjeta);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+  gap: var(--cuadro);
+  padding: calc(var(--cuadro) * 2) var(--cuadro) var(--cuadro);
+  border: 2px solid var(--tinta);
+  border-radius: 6px;
+  background-color: var(--papel);
+  background-image:
+    linear-gradient(var(--cuadricula) 1px, transparent 1px),
+    linear-gradient(90deg, var(--cuadricula) 1px, transparent 1px);
+  background-size: var(--cuadro) var(--cuadro);
 }
 
 .ventana-titulo {
-  margin: 0 0 4px;
-  font-size: 1.15rem;
-  font-weight: 600;
-  text-align: center;
+  margin: 0;
+  font-size: 20px;
+  line-height: calc(var(--cuadro) * 2);
+  font-weight: 700;
 }
 
 .ventana-botones {
   display: flex;
-  gap: 12px;
-  margin-top: 8px;
+  gap: var(--cuadro);
+  margin-top: var(--cuadro);
 }
 
 .ventana-botones .boton {
@@ -277,48 +454,40 @@ button:focus-visible {
   min-width: 0;
 }
 
-.boton:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-  transform: none;
-}
-
 /* ----- Campo de minutos ----- */
 .campo-etiqueta {
   display: block;
-  margin-bottom: 6px;
-  font-size: 0.85rem;
-  color: var(--texto-suave);
+  margin-bottom: 4px;
+  color: var(--tinta-suave);
 }
 
 .campo-fila {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 4px;
-  border: 1px solid var(--borde);
-  border-radius: 14px;
-  background: var(--fondo);
+  padding: 2px;
+  border: 2px solid var(--tinta-suave);
+  border-radius: 6px;
+  background: var(--papel);
 }
 
 .campo-fila:focus-within {
-  border-color: var(--acento);
+  border-color: var(--tinta);
 }
 
 .campo-boton {
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   flex: none;
   border: none;
-  border-radius: 10px;
-  background: var(--tarjeta);
-  color: var(--texto);
-  font-size: 1.2rem;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--tinta);
+  font-size: 20px;
 }
 
 .campo-boton:hover {
-  color: var(--acento);
+  background: var(--cuadricula);
 }
 
 .campo-fila input {
@@ -326,10 +495,10 @@ button:focus-visible {
   min-width: 0;
   border: none;
   background: transparent;
-  color: var(--texto);
-  font: inherit;
-  font-size: 1.2rem;
-  font-weight: 600;
+  color: var(--tinta);
+  font-family: var(--fuente-reloj);
+  font-size: 20px;
+  font-weight: 800;
   font-variant-numeric: tabular-nums;
   text-align: right;
 }
@@ -340,142 +509,15 @@ button:focus-visible {
 
 .campo-unidad {
   flex: 1;
-  color: var(--texto-suave);
-  font-size: 0.9rem;
+  color: var(--tinta-suave);
 }
 
 .campo-minutos.error .campo-fila {
-  border-color: #dc2626;
+  border-color: var(--boli-rojo);
 }
 
 .campo-aviso {
-  margin: 6px 0 0;
-  font-size: 0.8rem;
-  color: #dc2626;
-}
-
-/* ----- Lista de tareas ----- */
-.tarjeta-tareas {
-  text-align: left;
-}
-
-.tarjeta-tareas .titulo {
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.tareas-formulario {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 16px;
-}
-
-.tareas-campo {
-  flex: 1;
-  min-width: 0;
-  padding: 12px 14px;
-  border: 1px solid var(--borde);
-  border-radius: 14px;
-  background: var(--fondo);
-  color: var(--texto);
-  font: inherit;
-}
-
-.tareas-campo:focus {
-  outline: none;
-  border-color: var(--acento);
-}
-
-.tareas-anadir {
-  flex: none;
-  width: 48px;
-  border: none;
-  border-radius: 14px;
-  background: var(--acento);
-  color: #ffffff;
-  font-size: 1.4rem;
-  line-height: 1;
-  transition: opacity 0.2s;
-}
-
-.tareas-anadir:hover {
-  opacity: 0.9;
-}
-
-.tareas-vacia {
-  margin: 24px 0 8px;
-  text-align: center;
-  color: var(--texto-suave);
-  font-size: 0.9rem;
-}
-
-.tareas-lista {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.tarea {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 4px;
-  border-bottom: 1px solid var(--borde);
-}
-
-.tarea:last-child {
-  border-bottom: none;
-}
-
-.tarea-casilla {
-  flex: none;
-  width: 20px;
-  height: 20px;
-  margin: 0;
-  accent-color: var(--acento); /* la casilla marcada usa el color del modo */
-  cursor: pointer;
-}
-
-.tarea-texto {
-  flex: 1;
-  min-width: 0;
-  overflow-wrap: anywhere; /* parte las palabras muy largas en vez de salirse */
-  touch-action: manipulation; /* evita que el doble toque haga zoom en el móvil */
-}
-
-.tarea.hecha .tarea-texto {
-  color: var(--texto-suave);
-  text-decoration: line-through;
-}
-
-.tarea-campo {
-  flex: 1;
-  min-width: 0;
-  padding: 6px 10px;
-  border: 1px solid var(--acento);
-  border-radius: 10px;
-  background: var(--fondo);
-  color: var(--texto);
-  font: inherit;
-}
-
-.tarea-campo:focus {
-  outline: none;
-}
-
-.tarea-borrar {
-  flex: none;
-  width: 32px;
-  height: 32px;
-  border: none;
-  border-radius: 8px;
-  background: transparent;
-  color: var(--texto-suave);
-  font-size: 1.3rem;
-  line-height: 1;
-}
-
-.tarea-borrar:hover {
-  background: var(--fondo);
-  color: #dc2626;
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: var(--boli-rojo);
 }

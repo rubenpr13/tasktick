@@ -15,7 +15,7 @@ export default function SelectorPreset({ preset, tiemposPersonalizados, onCambia
           className={`preset ${preset === clave ? "activo" : ""}`}
           onClick={() => onCambiarPreset(clave)}
         >
-          <strong>{PRESETS[clave].nombre}</strong>
+          {PRESETS[clave].nombre}
         </button>
       ))}
 
@@ -25,7 +25,7 @@ export default function SelectorPreset({ preset, tiemposPersonalizados, onCambia
           className={`preset ${preset === "personalizado" ? "activo" : ""}`}
           onClick={() => onCambiarPreset("personalizado")}
         >
-          <strong>Personalizado</strong>
+          Personalizado
         </button>
       )}
     </div>

@@ -14,7 +14,7 @@ export default function PestanasModo({ modo, sesiones, onCambiarModo }) {
           className={`pestana ${modo === clave ? "activa" : ""}`}
           onClick={() => onCambiarModo(clave)}
         >
-          {NOMBRES_MODO[clave]}
+          {NOMBRES_MODO[clave]}{" "}
           <span className="contador">{sesiones[clave]}</span>
         </button>
       ))}

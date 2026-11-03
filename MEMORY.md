@@ -55,6 +55,12 @@ Registro de lo que se ha hecho en Study App y de las decisiones tomadas. Las reg
 - Distribución: en el ordenador, reloj a la izquierda y tareas a la derecha, separados por la línea de margen roja; en el móvil, una columna. Pestañas como palabras sueltas, la activa subrayada; contador de sesiones como número pequeño (elegido por Rubén, no palotes). Botones con esquinas de 6 px: Play en bloque de tinta, Detener y ⚙ con borde. Filas de tareas de 2 cuadros; casilla con ✓ en tinta y tachado en boli rojo.
 - Principios: lo atrevido solo en el reloj (subrayado detrás del tiempo); una sola animación (el subrayador se pinta de izquierda a derecha al cambiar de modo, sin animar si se pide reducir el movimiento); foco visible y bien en el móvil.
 
+### 2026-11-03: Rediseño "cuaderno + subrayador" programado
+- Aplicado el plan aprobado (reglas en `CLAUDE.md`, sección *Diseño*). Ventana de Personalizar y presets con el mismo estilo (elegido por Rubén).
+- Cambios sobre el plan, decididos por Rubén tras ver capturas: el reloj usa **Lexend** en vez de Atkinson Hyperlegible Mono, porque Atkinson tacha siempre el cero (no tiene variante sin tachar) y "00" parecía "ØØ"; el contador va en el mismo renglón (no elevado); en el móvil las pestañas van a 13 px para caber en una fila (con 14 px no cabían) y hay menos hueco entre reloj y tareas.
+- Código: `Temporizador` recibe `modo` y pinta los números en un `<span key={modo}>` para repetir la animación; `App` monta una `.hoja` con dos `.columna` (`columna-reloj`, `columna-tareas`) en lugar de `.tarjeta`; `SelectorPreset` ya no usa `<strong>`; espacio entre el nombre de la pestaña y su contador.
+- Probado en Chrome: ordenador, móvil de 375 px (sin scroll horizontal, pestañas en una fila), ventana de Personalizar y cambio de modo. Las fuentes cargan bien.
+
 ## Decisiones pendientes de revisar
 Las tomé yo porque el encargo no las especificaba:
 - [x] Al terminar el descanso largo se vuelve a Concentración. Confirmado por Rubén el 2026-11-03.

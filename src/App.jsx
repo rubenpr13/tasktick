@@ -40,34 +40,36 @@ export default function App() {
 
   return (
     <main className={`app modo-${modo}`}>
-      <div className="tarjeta">
-        <h1 className="titulo">Study App</h1>
+      <div className="hoja">
+        <section className="columna columna-reloj">
+          <h1 className="titulo">Study App</h1>
 
-        <PestanasModo modo={modo} sesiones={sesiones} onCambiarModo={cambiarModo} />
+          <PestanasModo modo={modo} sesiones={sesiones} onCambiarModo={cambiarModo} />
 
-        <Temporizador segundos={segundosRestantes} />
+          <Temporizador segundos={segundosRestantes} modo={modo} />
 
-        <Controles
-          enMarcha={enMarcha}
-          onPlayPausa={alternarPlayPausa}
-          onDetener={detener}
-          onPersonalizar={() => setVentanaAbierta(true)}
-        />
+          <Controles
+            enMarcha={enMarcha}
+            onPlayPausa={alternarPlayPausa}
+            onDetener={detener}
+            onPersonalizar={() => setVentanaAbierta(true)}
+          />
 
-        <SelectorPreset
-          preset={preset}
-          tiemposPersonalizados={tiemposPersonalizados}
-          onCambiarPreset={cambiarPreset}
+          <SelectorPreset
+            preset={preset}
+            tiemposPersonalizados={tiemposPersonalizados}
+            onCambiarPreset={cambiarPreset}
+          />
+        </section>
+
+        <ListaTareas
+          tareas={tareas}
+          onAnadir={anadirTarea}
+          onAlternarHecha={alternarHecha}
+          onEditar={editarTarea}
+          onBorrar={borrarTarea}
         />
       </div>
-
-      <ListaTareas
-        tareas={tareas}
-        onAnadir={anadirTarea}
-        onAlternarHecha={alternarHecha}
-        onEditar={editarTarea}
-        onBorrar={borrarTarea}
-      />
 
       {/* La ventana se abre con los últimos tiempos guardados (al principio 25 / 5 / 30) */}
       {ventanaAbierta && (
