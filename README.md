@@ -55,10 +55,12 @@ study-app/
 ├── package.json      # Dependencias y comandos
 └── src/
     ├── main.jsx          # Punto de entrada: monta el componente App
-    ├── App.jsx           # Componente principal: estado y lógica del temporizador
+    ├── App.jsx           # Componente principal: monta la interfaz
     ├── App.css           # Estilos
     ├── config.js         # Presets, descanso largo y nombres de los modos
     ├── utilidades.js     # Funciones de ayuda (duración de un modo, formato MM:SS)
+    ├── hooks/
+    │   └── usePomodoro.js  # Lógica del temporizador
     └── components/       # Componentes de la interfaz
         ├── PestanasModo.jsx    # Pestañas de modo con su contador de sesiones
         ├── Temporizador.jsx    # Tiempo restante

@@ -25,6 +25,7 @@ Registro de lo que se ha hecho en Study App y de las decisiones tomadas. Las reg
 - El estado y la lógica siguen en `App`, que los pasa por props; los componentes no tienen estado propio.
 - Los textos de los presets ("25 min foco · 5 min descanso") ahora salen de `PRESETS`, que incluye el nombre de cada preset.
 - El funcionamiento y el aspecto de la app no cambian.
+- Revisado por Rubén: la lógica del reloj pasa al hook `src/hooks/usePomodoro.js`, los estilos se quedan en `App.css` y las props de los componentes se llaman `onX` (`onCambiarModo`, `onPlayPausa`, `onDetener`, `onCambiarPreset`).
 
 ## Decisiones pendientes de revisar
 Las tomé yo porque el encargo no las especificaba:
@@ -33,6 +34,6 @@ Las tomé yo porque el encargo no las especificaba:
 - [ ] Cambiar de pestaña o de preset reinicia el tiempo y lo deja en pausa.
 - [ ] Detener pausa y vuelve al inicio del modo actual, sin sumar sesión.
 - [ ] Los contadores no se guardan al recargar la página.
-- [ ] Componentes: el estado sigue en `App` (no en un hook propio), los estilos siguen todos en `App.css` y los archivos y props van en español (`alCambiarModo`…).
+- [x] ~~Componentes: el estado sigue en `App`, los estilos en `App.css` y las props en español (`alCambiarModo`…).~~ Revisado el 2026-11-03: lógica en el hook `usePomodoro`, estilos en `App.css` y props `onX`.
 
 Cuando revises una, márcala con `[x]` o pide el cambio, y actualizaré también `CLAUDE.md`.

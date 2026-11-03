@@ -4,15 +4,15 @@ import { NOMBRES_MODO } from "../config.js";
 // Props:
 // - modo: modo activo ("foco", "descansoCorto" o "descansoLargo")
 // - sesiones: objeto con el número de sesiones de cada modo
-// - alCambiarModo: función que se llama con el modo pulsado
-export default function PestanasModo({ modo, sesiones, alCambiarModo }) {
+// - onCambiarModo: función que se llama con el modo pulsado
+export default function PestanasModo({ modo, sesiones, onCambiarModo }) {
   return (
     <nav className="pestanas">
       {Object.keys(NOMBRES_MODO).map((clave) => (
         <button
           key={clave}
           className={`pestana ${modo === clave ? "activa" : ""}`}
-          onClick={() => alCambiarModo(clave)}
+          onClick={() => onCambiarModo(clave)}
         >
           {NOMBRES_MODO[clave]}
           <span className="contador">{sesiones[clave]}</span>

@@ -4,15 +4,15 @@ import { PRESETS } from "../config.js";
 // Los textos salen de PRESETS, así que si cambias una duración se actualiza solo.
 // Props:
 // - preset: preset activo ("corto" o "largo")
-// - alCambiarPreset: función que se llama con el preset pulsado
-export default function SelectorPreset({ preset, alCambiarPreset }) {
+// - onCambiarPreset: función que se llama con el preset pulsado
+export default function SelectorPreset({ preset, onCambiarPreset }) {
   return (
     <div className="presets">
       {Object.keys(PRESETS).map((clave) => (
         <button
           key={clave}
           className={`preset ${preset === clave ? "activo" : ""}`}
-          onClick={() => alCambiarPreset(clave)}
+          onClick={() => onCambiarPreset(clave)}
         >
           <strong>{PRESETS[clave].nombre}</strong>
           <span>

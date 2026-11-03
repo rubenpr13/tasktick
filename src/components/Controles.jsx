@@ -1,15 +1,15 @@
 // Botones Play/Pausa y Detener.
 // Props:
 // - enMarcha: true si el temporizador está contando
-// - alPulsarPlayPausa: función que pone en marcha o pausa el temporizador
-// - alDetener: función que pausa y vuelve al inicio del modo actual
-export default function Controles({ enMarcha, alPulsarPlayPausa, alDetener }) {
+// - onPlayPausa: función que pone en marcha o pausa el temporizador
+// - onDetener: función que pausa y vuelve al inicio del modo actual
+export default function Controles({ enMarcha, onPlayPausa, onDetener }) {
   return (
     <div className="controles">
-      <button className="boton boton-principal" onClick={alPulsarPlayPausa}>
+      <button className="boton boton-principal" onClick={onPlayPausa}>
         {enMarcha ? "Pausa" : "Play"}
       </button>
-      <button className="boton boton-secundario" onClick={alDetener}>
+      <button className="boton boton-secundario" onClick={onDetener}>
         Detener
       </button>
     </div>
