@@ -1,4 +1,4 @@
-# Study App
+# TaskTick
 
 Web para estudiar con la **técnica Pomodoro**: alterna bloques de concentración con descansos cortos para estudiar sin agotarte. Incluye una **lista de tareas** para apuntar lo que vas a estudiar.
 
@@ -34,8 +34,8 @@ Necesitas tener instalado [Node.js](https://nodejs.org/) (versión 18 o superior
 
 ```bash
 # 1. Clonar el repositorio
-git clone https://github.com/rubenpr13/study-app.git
-cd study-app
+git clone https://github.com/rubenpr13/tasktick.git
+cd tasktick
 
 # 2. Instalar las dependencias
 npm install
@@ -56,7 +56,7 @@ Abre http://localhost:5173 en el navegador.
 ## Estructura del proyecto
 
 ```
-study-app/
+tasktick/
 ├── index.html        # Página base donde se monta React
 ├── vite.config.js    # Configuración de Vite
 ├── package.json      # Dependencias y comandos

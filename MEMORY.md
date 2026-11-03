@@ -1,6 +1,6 @@
 # Memoria del proyecto
 
-Registro de lo que se ha hecho en Study App y de las decisiones tomadas. Las reglas actuales de la app están en `CLAUDE.md`.
+Registro de lo que se ha hecho en TaskTick (antes Study App) y de las decisiones tomadas. Las reglas actuales de la app están en `CLAUDE.md`.
 
 ## Historial
 
@@ -64,6 +64,13 @@ Registro de lo que se ha hecho en Study App y de las decisiones tomadas. Las reg
 ### 2026-11-03: Nuevos títulos de las columnas
 - A petición de Rubén, la columna del reloj se titula "Temporizador" (antes "Study App") y la de las tareas "To Do List" (antes "Tareas"). Es la única excepción a los textos en español.
 - El título de la pestaña del navegador (`<title>` en `index.html`) sigue siendo "Study App".
+
+### 2026-11-03: Nuevo nombre, TaskTick
+- Rubén elige el nombre **TaskTick** (*task* = tarea; *tick* = tic del reloj y marca ✓ de hecho) entre varias propuestas. Se le avisó de que se parece a TickTick, una app de tareas con Pomodoro, por posibles problemas de marca; decide quedárselo.
+- Cambiado en la pestaña del navegador (`<title>`), `package.json` y `package-lock.json` (`tasktick`), `README.md` y `CLAUDE.md`. Dentro de la página no aparece el nombre (decisión de Rubén). El historial anterior sigue diciendo "Study App".
+- Repositorio de GitHub renombrado de `study-app` a `tasktick` (GitHub redirige las URL antiguas); remoto local actualizado.
+- Notas del vault renombradas a `TaskTick`, `TaskTick - Registro` y `TaskTick - Aprendizajes técnicos`, con sus enlaces actualizados.
+- Rubén renombrará la carpeta local `proyectos/study-app` a `proyectos/tasktick` al cerrar la sesión; la memoria de Claude Code se dejó copiada en la ruta nueva.
 
 ## Decisiones pendientes de revisar
 Las tomé yo porque el encargo no las especificaba:

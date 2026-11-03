@@ -1,4 +1,6 @@
-# Study App
+# TaskTick
+
+Nombre de la app desde el 2026-11-03 (antes "Study App"; elegido por Rubén). Se ve en la pestaña del navegador, no dentro de la página.
 
 Web para estudiar con la técnica Pomodoro y una lista de tareas. Hecha con Vite + React 18, en JavaScript (sin TypeScript) y con CSS normal.
 
@@ -25,7 +27,7 @@ No hay tests ni linter configurados.
 - `.mcp.json`: servidores MCP de Claude Code (ahora `chrome-devtools`, para abrir y probar la app en Chrome). Es personal: está en `.gitignore` y no se sube (decidido por Rubén el 2026-11-03)
 
 ## Reglas del temporizador (no cambiarlas sin pedirlo)
-- La columna del reloj se titula "Temporizador" (cambiado por Rubén el 2026-11-03; antes "Study App"). La pestaña del navegador sigue diciendo "Study App".
+- La columna del reloj se titula "Temporizador" (cambiado por Rubén el 2026-11-03; antes "Study App"). El nombre de la app, "TaskTick", solo sale en la pestaña del navegador.
 - Cuenta atrás hasta `00:00`. Al abrir o recargar la web se muestra Concentración con 25:00 en pausa; solo empieza al pulsar Play (cambiado por Rubén el 2026-10-29).
 - Presets: Corto = 25 min de foco / 5 min de descanso; Largo = 50 / 10. En Corto y Largo el Descanso largo dura siempre 30 min. El Descanso largo solo se activa a mano.
 - Personalizar (decidido por Rubén el 2026-11-03): el botón ⚙ junto a Play/Detener abre una ventana centrada con Concentración, Descanso corto y Descanso largo (campo de texto que solo admite dígitos, sin flechas, con botones − y +; de 1 a 120 min). Se abre con los últimos tiempos guardados (al principio 25 / 5 / 30). Solo se aplica al pulsar Guardar, y no deja guardar si un valor no es válido. Se cierra sin guardar con Cancelar, pulsando fuera o con Escape.
@@ -56,7 +58,7 @@ No hay tests ni linter configurados.
 - Tareas: casilla de un cuadro con ✓ en tinta; las hechas se tachan en boli rojo.
 
 ## Git y GitHub
-Repositorio público: https://github.com/rubenpr13/study-app (rama `master`, remoto `origin`).
+Repositorio público: https://github.com/rubenpr13/tasktick (rama `master`, remoto `origin`; antes se llamaba `study-app`).
 - **Subir siempre lo que se modifica (pedido por Rubén el 2026-10-29):** al terminar cada cambio que funcione, haz un commit y un `git push` sin esperar a que te lo pidan. No hace falta preguntar antes.
 - Un commit por cambio, con el mensaje en español, en imperativo y explicando qué se ha hecho.
 - Antes de cada commit, revisa `git status`: nunca subas `node_modules/`, `dist/`, `.claude/settings.local.json`, `.mcp.json` ni claves o contraseñas.
@@ -64,9 +66,10 @@ Repositorio público: https://github.com/rubenpr13/study-app (rama `master`, rem
 ## Segundo cerebro (vault de Obsidian)
 Vault: `C:\Users\ruben\iCloudDrive\iCloud~md~obsidian\Rpinazo`. Antes de escribir en él, lee su `AGENTS.md` y sigue sus reglas (plantilla, propiedades, carpetas sensibles…).
 - **Guardar**: a medida que avance la sesión, vuelca en el vault lo que se aprenda o decida, sin esperar a que te lo pidan. Las notas del proyecto se capturan en `00 - Inbox/` (decidido por Rubén el 2026-10-28):
-  - `Study App`: qué es, estado y pendientes (actualizar)
-  - `Study App - Registro`: una entrada por sesión (solo añadir)
-  - `Study App - Aprendizajes técnicos`: lo aprendido (actualizar)
+  - `TaskTick`: qué es, estado y pendientes (actualizar)
+  - `TaskTick - Registro`: una entrada por sesión (solo añadir)
+  - `TaskTick - Aprendizajes técnicos`: lo aprendido (actualizar)
+  - Hasta el 2026-11-03 se llamaban `Study App…`.
   - Si Rubén mueve estas notas al procesar el Inbox, búscalas por nombre en el vault.
 - **Consultar**: para buscar información, empieza por `06 - Wiki/index.md`. Hay notas útiles en `01 - Proyectos/MyStudyDiaryApp/` (fechas locales, Git, Claude Code) y en `06 - Wiki/Conceptos/` (HTML, CSS, Flexbox, Git).
 
