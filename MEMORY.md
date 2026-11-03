@@ -82,6 +82,10 @@ Registro de lo que se ha hecho en TaskTick (antes Study App) y de las decisiones
 - En la sesión del rediseño se usó con `npx skills use`, que no la instala; por eso no estaba en `.claude/skills`. A petición de Rubén se instala con `npx skills add https://github.com/anthropics/skills --skill frontend-design` en `.claude/skills/frontend-design/` y queda añadida a `skills-lock.json`.
 - Revisada: solo tiene `SKILL.md` (instrucciones de texto) y la licencia, sin scripts. El instalador la marca como segura ("Safe" en Gen, "Low Risk" en Snyk). Anotada en `CLAUDE.md`, en *Estructura*.
 
+### 2026-11-03: Arreglos de la revisión con design-taste-frontend
+- Revisión con el inspector de la skill (con Node 20 funciona usando `node --experimental-websocket`; pide Node 22). Rubén aprobó tres arreglos pequeños, sin cambiar el diseño:
+- Contadores de sesiones en Lexend: con Atkinson el 0 salía tachado (Ø), igual que pasaba en el reloj.
+
 ## Decisiones pendientes de revisar
 Las tomé yo porque el encargo no las especificaba:
 - [x] Al terminar el descanso largo se vuelve a Concentración. Confirmado por Rubén el 2026-11-03.

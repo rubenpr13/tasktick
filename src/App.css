@@ -110,8 +110,11 @@ input:focus-visible {
   background-position: 0 72%;
 }
 
-/* Número pequeño con las sesiones completadas, en el mismo renglón */
+/* Número pequeño con las sesiones completadas, en el mismo renglón.
+   En Lexend, como el reloj: con Atkinson el 0 salía tachado (Ø) */
 .contador {
+  font-family: var(--fuente-reloj);
+  font-variant-numeric: tabular-nums;
   font-size: 13px;
   font-weight: 700;
   color: var(--tinta-suave);
