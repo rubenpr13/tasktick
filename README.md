@@ -17,7 +17,7 @@ Web para estudiar con la **técnica Pomodoro**: alterna bloques de concentració
 - **Controles**: Iniciar / Pausa, Detener (vuelve al inicio del modo actual) y el engranaje para personalizar los tiempos.
 - **Tiempos personalizados**: el engranaje abre una ventana para elegir los minutos de concentración, descanso corto y descanso largo (de 1 a 120). Al guardar aparece el preset **Personalizado** con esos tiempos.
 - **Lista de tareas** ("To Do List") en una columna junto al reloj (debajo en el móvil): añade tareas con + o Enter, márcalas como hechas, edítalas con doble clic (Enter o pulsar fuera guarda, Escape cancela) y bórralas con ×.
-- **Constancia**: tu racha de días seguidos estudiando (y la mejor) y un **mapa de calor** del último año, como el de GitHub. Cada día se pinta más amarillo cuantos más minutos de concentración terminaste (menos de 1 h, 1-2 h, 2-3 h o 3 h o más). Al pasar el ratón o tocar un día se ve su dato.
+- **Constancia**: tu racha de días seguidos estudiando (y la mejor) y un **mapa de calor** del año (del 1 de enero al 31 de diciembre), como el de GitHub, con flechas para ver años anteriores. Cada día se pinta más amarillo cuantos más minutos de concentración terminaste (menos de 1 h, 1-2 h, 2-3 h o 3 h o más). Al pasar el ratón o tocar un día, su dato sale en una ventanita.
 - **Pestaña del navegador**: mientras el reloj corre, el título muestra el tiempo que queda ("24:58 · Concentración").
 - **Se guarda en tu navegador** (`localStorage`): las tareas, los tiempos personalizados y el historial de sesiones de cada día. No hay cuentas ni servidor: los datos no salen de tu dispositivo, y si borras los datos del navegador se pierden.
 
@@ -86,7 +86,7 @@ tasktick/
         ├── CampoMinutos.jsx    # Campo de minutos con botones − y +
         ├── ListaTareas.jsx     # Columna de tareas: campo para añadir y lista
         ├── Tarea.jsx           # Una tarea: casilla, texto editable y botón ×
-        └── Constancia.jsx      # Racha y mapa de calor del último año
+        └── Constancia.jsx      # Racha y mapa de calor del año
 ```
 
 ## Detalles técnicos
