@@ -115,5 +115,8 @@ Las tomé yo porque el encargo no las especificaba:
 - [x] Detener pausa y vuelve al inicio del modo actual, sin sumar sesión. Confirmado por Rubén el 2026-11-03.
 - [x] Los contadores no se guardan al recargar la página. Confirmado por Rubén el 2026-11-03.
 - [x] ~~Componentes: el estado sigue en `App`, los estilos en `App.css` y las props en español (`alCambiarModo`…).~~ Revisado el 2026-11-03: lógica en el hook `usePomodoro`, estilos en `App.css` y props `onX`.
+- [x] La línea roja de la cabecera es tan ancha como la hoja (no como toda la pantalla). Confirmado por Rubén el 2026-11-03.
+- [x] En pausa a mitad, el subrayador del reloj queda a opacidad 0,4. Confirmado por Rubén el 2026-11-03.
+- [x] En dos columnas el reloj mide `clamp(80px, 12vw, 140px)` (92 px a 768, 140 px desde unos 1170). Confirmado por Rubén el 2026-11-03.
 
 Cuando revises una, márcala con `[x]` o pide el cambio, y actualizaré también `CLAUDE.md`.
