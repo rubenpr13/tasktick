@@ -50,4 +50,4 @@ Vault: `C:\Users\ruben\iCloudDrive\iCloud~md~obsidian\Rpinazo`. Antes de escribi
 - Todos los textos de la interfaz, en español.
 - No añadir funcionalidades que no se hayan pedido (sonidos, notificaciones, localStorage, ajustes, librerías nuevas…).
 - Diseño limpio y moderno; tiene que verse bien en el móvil.
-- Preguntar cualquier tipo de duda o cosa que no esté clara.
+- **No tomar decisiones propias (pedido por Rubén el 2026-11-03):** preguntar siempre antes, en todo (estructura, nombres, textos, alcance del cambio…), con opciones y una recomendación. Cualquier duda o cosa que no esté clara también se pregunta.

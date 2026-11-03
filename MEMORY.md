@@ -26,6 +26,7 @@ Registro de lo que se ha hecho en Study App y de las decisiones tomadas. Las reg
 - Los textos de los presets ("25 min foco · 5 min descanso") ahora salen de `PRESETS`, que incluye el nombre de cada preset.
 - El funcionamiento y el aspecto de la app no cambian.
 - Revisado por Rubén: la lógica del reloj pasa al hook `src/hooks/usePomodoro.js`, los estilos se quedan en `App.css` y las props de los componentes se llaman `onX` (`onCambiarModo`, `onPlayPausa`, `onDetener`, `onCambiarPreset`).
+- Nueva regla en `CLAUDE.md`: no tomar decisiones propias; preguntar siempre antes, en todo.
 
 ## Decisiones pendientes de revisar
 Las tomé yo porque el encargo no las especificaba:
