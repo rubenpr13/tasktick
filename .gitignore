@@ -12,3 +12,7 @@ dist/
 
 # Archivos de trabajo de la skill design-taste-frontend (capturas e informes)
 .taste-skill/
+
+# Instrucciones e historial de Claude Code: tienen datos personales y se quedan solo en este ordenador (decidido por Rubén el 2026-11-03)
+CLAUDE.md
+MEMORY.md
