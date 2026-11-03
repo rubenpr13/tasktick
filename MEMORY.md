@@ -93,6 +93,9 @@ Registro de lo que se ha hecho en TaskTick (antes Study App) y de las decisiones
 - "Temporizador" pasa de `h1` a `h2`, como "To Do List". Por fuera se ven igual.
 - Actualizado `CLAUDE.md`: el nombre ya no sale solo en la pestaña del navegador.
 
+### 2026-11-03: Icono de la pestaña
+- A petición de Rubén, la pestaña tiene icono: `public/favicon.svg`, la casilla marcada en tinta sobre papel (la misma marca que la cabecera). Se enlaza en `index.html`.
+
 ## Decisiones pendientes de revisar
 Las tomé yo porque el encargo no las especificaba:
 - [x] Al terminar el descanso largo se vuelve a Concentración. Confirmado por Rubén el 2026-11-03.

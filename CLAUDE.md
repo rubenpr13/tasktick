@@ -22,7 +22,8 @@ No hay tests ni linter configurados.
 - `src/config.js`: presets, duración del descanso largo, tiempos iniciales de Personalizado, límites de minutos, nombres de los modos y largo máximo de una tarea
 - `src/utilidades.js`: funciones de ayuda (`obtenerDuracion`, `formatearTiempo`)
 - `src/App.css`: todos los estilos; los colores y medidas son variables en `:root` y el color del subrayador cambia por modo (`.modo-foco`, `.modo-descansoCorto`, `.modo-descansoLargo`)
-- `index.html`: carga las fuentes de Google Fonts (Atkinson Hyperlegible Next y Lexend)
+- `index.html`: carga las fuentes de Google Fonts (Atkinson Hyperlegible Next y Lexend) y el icono de la pestaña
+- `public/favicon.svg`: icono de la pestaña, la casilla marcada de la cabecera
 - `src/main.jsx`: monta `<App />`
 - `.mcp.json`: servidores MCP de Claude Code (ahora `chrome-devtools`, para abrir y probar la app en Chrome). Es personal: está en `.gitignore` y no se sube (decidido por Rubén el 2026-11-03)
 - `.claude/skills/design-taste-frontend/`: skill de diseño de Claude Code (de `Leonxlnx/taste-skill`, instalada por Rubén el 2026-11-03; su origen está en `skills-lock.json`). Sus archivos de trabajo van a `.taste-skill/`, que está en `.gitignore`. Usarla no autoriza a cambiar el diseño aprobado: cualquier propuesta suya se pregunta antes a Rubén

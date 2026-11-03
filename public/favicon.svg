@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Icono de TaskTick: la casilla marcada de las tareas, en tinta sobre papel -->
+  <rect x="3" y="3" width="26" height="26" rx="5" fill="#f7f9fb" stroke="#1e2a3a" stroke-width="4" />
+  <path d="M9 16.5l4.5 4.5L23 11" fill="none" stroke="#1e2a3a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+</svg>
