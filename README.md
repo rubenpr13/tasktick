@@ -2,6 +2,8 @@
 
 Web para estudiar con la **técnica Pomodoro**: alterna bloques de concentración con descansos cortos para estudiar sin agotarte. Incluye una **lista de tareas** para apuntar lo que vas a estudiar.
 
+**Pruébala en https://tasktick-alpha.vercel.app/**
+
 ## Funcionalidades
 
 - **Temporizador** que cuenta hacia atrás hasta `00:00`. Al abrir la web muestra 25 minutos de concentración y empieza al pulsar **Iniciar**.
