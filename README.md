@@ -91,7 +91,7 @@ tasktick/
 
 ## Detalles técnicos
 
-El temporizador no se fía solo de `setInterval`: cuando la pestaña está en segundo plano, el navegador lo ralentiza. Por eso, al pulsar Play se guarda la hora de fin y en cada segundo se calcula lo que falta con la hora local del dispositivo (`Date.now()`). Así la cuenta atrás es exacta aunque cambies de pestaña.
+El temporizador no se fía solo de `setInterval`: cuando la pestaña está en segundo plano, el navegador lo ralentiza. Por eso, al pulsar Iniciar se guarda la hora de fin y en cada segundo se calcula lo que falta con la hora local del dispositivo (`Date.now()`). Así la cuenta atrás es exacta aunque cambies de pestaña.
 
 Las fechas del historial también se guardan con la hora local (`AAAA-MM-DD`), así que el día cambia a tu medianoche, no a la de otro huso horario.
 
