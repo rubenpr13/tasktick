@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SEMANAS_MAPA } from "../config.js";
 import {
   calcularRachas,
@@ -11,8 +11,6 @@ import {
 
 const NOMBRES_MES = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
 const NOMBRES_DIA = ["dom", "lun", "mar", "mié", "jue", "vie", "sáb"];
-// Letras de los días a la izquierda del mapa (fila 0 = lunes); solo se ven L, X y V
-const LETRAS_DIA = ["L", "", "X", "", "V", "", ""];
 
 // Texto de un día: "lun 3 nov: 1 h 15 min de concentración (3 sesiones)"
 function describirDia(fecha, datos) {
@@ -24,14 +22,29 @@ function describirDia(fecha, datos) {
   return `${nombre}: ${minutos} de concentración (${sesiones} ${sesiones === 1 ? "sesión" : "sesiones"})`;
 }
 
+// Pone las cifras de un texto en Lexend (clase "cifra"): en Atkinson el 0 sale tachado (Ø)
+function conCifras(texto) {
+  return texto.split(/(\d+)/).map((trozo, i) =>
+    /\d/.test(trozo) ? (
+      <span key={i} className="cifra">
+        {trozo}
+      </span>
+    ) : (
+      trozo
+    )
+  );
+}
+
 // Sección "Constancia": la racha de días seguidos estudiando y un mapa de calor del último año.
 // Cada cuadro es un día, más amarillo cuantos más minutos de concentración.
+// Al pasar el ratón, tocar un día o moverse con las flechas, su dato sale en una ventanita flotante.
 // Props:
 // - historial: sesiones y minutos de concentración de cada día ({ "2026-11-03": { foco, minutosFoco, ... } })
 export default function Constancia({ historial }) {
   const hoy = fechaDeHoy();
-  // Día cuyo dato se muestra debajo del mapa (al principio, hoy)
-  const [elegido, setElegido] = useState(hoy);
+  // Día que muestra la ventanita y dónde está su cuadro: { fecha, x, y, ancho }, o null si no hay ventanita
+  const [senalado, setSenalado] = useState(null);
+  const mapa = useRef(null);
 
   const { actual, mejor } = calcularRachas(historial);
 
@@ -53,14 +66,37 @@ export default function Constancia({ historial }) {
     }
   }
 
-  // Con el teclado: las flechas mueven el día elegido (izquierda/derecha = una semana)
+  // Abre la ventanita encima del cuadro de un día (los días que aún no han llegado no tienen)
+  function senalar(fecha) {
+    if (fecha < inicio || fecha > hoy) return;
+    const cuadro = mapa.current.querySelector(`[data-fecha="${fecha}"]`);
+    setSenalado({ fecha, x: cuadro.offsetLeft, y: cuadro.offsetTop, ancho: cuadro.offsetWidth });
+  }
+
+  // En el móvil, la ventanita se cierra al tocar fuera de un día
+  useEffect(() => {
+    if (senalado === null) return;
+    function cerrarSiFuera(evento) {
+      if (!evento.target.closest(".mapa .dia")) setSenalado(null);
+    }
+    document.addEventListener("pointerdown", cerrarSiFuera);
+    return () => document.removeEventListener("pointerdown", cerrarSiFuera);
+  }, [senalado]);
+
+  // Con el teclado: al entrar en el mapa se señala hoy, y las flechas mueven el día (izquierda/derecha = una semana)
   function moverConTeclado(evento) {
     const pasos = { ArrowLeft: -7, ArrowRight: 7, ArrowUp: -1, ArrowDown: 1 };
     if (!(evento.key in pasos)) return;
     evento.preventDefault();
-    const nuevo = sumarDias(elegido, pasos[evento.key]);
-    if (nuevo < inicio || nuevo > hoy) return; // no se sale del mapa ni pasa de hoy
-    setElegido(nuevo);
+    senalar(sumarDias(senalado?.fecha ?? hoy, pasos[evento.key]));
+  }
+
+  // La ventanita va centrada sobre el día; cerca de los bordes del mapa se apoya en un lado para no salirse
+  let lado = "centro";
+  if (senalado !== null) {
+    const anchoMapa = mapa.current.offsetWidth;
+    if (senalado.x < anchoMapa * 0.2) lado = "izquierda";
+    else if (senalado.x > anchoMapa * 0.8) lado = "derecha";
   }
 
   return (
@@ -80,8 +116,10 @@ export default function Constancia({ historial }) {
         role="group"
         aria-label="Mapa de constancia del último año. Usa las flechas para cambiar de día."
         onKeyDown={moverConTeclado}
+        onFocus={() => senalar(hoy)}
+        onBlur={() => setSenalado(null)}
       >
-        <div className="mapa" aria-hidden="true">
+        <div ref={mapa} className="mapa" aria-hidden="true" onMouseLeave={() => setSenalado(null)}>
           {meses.map((mes) => (
             <span
               key={`${mes.semana}-${mes.nombre}`}
@@ -89,51 +127,59 @@ export default function Constancia({ historial }) {
               // Un mes que empieza en las 2 últimas semanas se alinea al final del mapa, para no salirse por la derecha
               style={
                 mes.semana >= SEMANAS_MAPA - 2
-                  ? { gridColumn: `${mes.semana + 2} / -1`, justifySelf: "end" }
-                  : { gridColumn: mes.semana + 2 }
+                  ? { gridColumn: `${mes.semana + 1} / -1`, justifySelf: "end" }
+                  : { gridColumn: mes.semana + 1 }
               }
             >
               {mes.nombre}
             </span>
           ))}
 
-          {LETRAS_DIA.map((letra, fila) => (
-            <span key={fila} className="mapa-dia-semana" style={{ gridRow: fila + 2 }}>
-              {letra}
-            </span>
-          ))}
-
           {cuadros.map((cuadro) => (
             <span
               key={cuadro.fecha}
+              data-fecha={cuadro.fecha}
               className={[
                 "dia",
                 `nivel-${cuadro.nivel}`,
                 cuadro.fecha === hoy ? "hoy" : "",
-                cuadro.fecha === elegido ? "elegido" : "",
+                cuadro.fecha === senalado?.fecha ? "senalado" : "",
                 cuadro.fecha > hoy ? "futuro" : "",
               ].join(" ")}
-              style={{ gridColumn: cuadro.semana + 2, gridRow: cuadro.fila + 2 }}
-              onMouseEnter={() => cuadro.fecha <= hoy && setElegido(cuadro.fecha)}
-              onClick={() => cuadro.fecha <= hoy && setElegido(cuadro.fecha)}
+              style={{ gridColumn: cuadro.semana + 1, gridRow: cuadro.fila + 2 }}
+              onMouseEnter={() => senalar(cuadro.fecha)}
+              onClick={() => senalar(cuadro.fecha)}
             ></span>
           ))}
+
+          {/* Ventanita flotante con el dato del día, encima de su cuadro */}
+          {senalado !== null && (
+            <span
+              className={`mapa-ventanita ${lado}`}
+              style={{
+                left: lado === "derecha" ? senalado.x + senalado.ancho : senalado.x + (lado === "centro" ? senalado.ancho / 2 : 0),
+                top: senalado.y,
+                "--mitad-dia": `${senalado.ancho / 2}px`,
+              }}
+            >
+              {conCifras(describirDia(senalado.fecha, historial[senalado.fecha]))}
+            </span>
+          )}
         </div>
       </div>
 
-      <div className="constancia-pie">
-        {/* aria-live: el lector de pantalla lee el dato cada vez que cambia el día elegido */}
-        <p className="mapa-dato" aria-live="polite">
-          {describirDia(elegido, historial[elegido])}
-        </p>
-        <p className="leyenda" aria-hidden="true">
-          Menos
-          {[0, 1, 2, 3, 4].map((nivel) => (
-            <span key={nivel} className={`dia nivel-${nivel}`}></span>
-          ))}
-          Más
-        </p>
-      </div>
+      {/* Para lectores de pantalla: leen el dato cada vez que cambia el día señalado */}
+      <p className="solo-lector" aria-live="polite">
+        {senalado !== null ? describirDia(senalado.fecha, historial[senalado.fecha]) : ""}
+      </p>
+
+      <p className="leyenda" aria-hidden="true">
+        Menos
+        {[0, 1, 2, 3, 4].map((nivel) => (
+          <span key={nivel} className={`dia nivel-${nivel}`}></span>
+        ))}
+        Más
+      </p>
     </section>
   );
 }
