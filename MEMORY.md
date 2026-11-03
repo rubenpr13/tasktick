@@ -99,6 +99,9 @@ Registro de lo que se ha hecho en TaskTick (antes Study App) y de las decisiones
 ### 2026-11-03: Tiempo en la pestaña del navegador
 - A petición de Rubén, mientras el reloj corre el título de la pestaña muestra lo que queda y el modo ("24:58 · Concentración"). En pausa (y al abrir la web) vuelve a "TaskTick". Está en un `useEffect` de `App.jsx`.
 
+### 2026-11-03: Aviso de "en pausa"
+- A petición de Rubén, si el reloj está parado a mitad (ya había contado algo), el subrayador del reloj se ve más claro (opacidad 0,4). Al abrir la web, tras Detener o al cambiar de modo o preset está al inicio y se ve normal. `App.jsx` calcula `enPausa` y se lo pasa a `Temporizador`. Sin animación, para no añadir otra.
+
 ## Decisiones pendientes de revisar
 Las tomé yo porque el encargo no las especificaba:
 - [x] Al terminar el descanso largo se vuelve a Concentración. Confirmado por Rubén el 2026-11-03.

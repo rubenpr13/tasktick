@@ -5,9 +5,10 @@ import { formatearTiempo } from "../utilidades.js";
 // Props:
 // - segundos: segundos que quedan
 // - modo: modo activo; al cambiar, el subrayador se vuelve a pintar
-export default function Temporizador({ segundos, modo }) {
+// - enPausa: true si está parado a mitad; entonces el subrayador se ve más claro
+export default function Temporizador({ segundos, modo, enPausa }) {
   return (
-    <p className="tiempo">
+    <p className={`tiempo ${enPausa ? "en-pausa" : ""}`}>
       {/* key={modo} hace que React cree el span de nuevo al cambiar de modo, y así se repite la animación */}
       <span key={modo} className="tiempo-numeros">
         {formatearTiempo(segundos)}

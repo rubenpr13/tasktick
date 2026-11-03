@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import usePomodoro from "./hooks/usePomodoro.js";
 import useTareas from "./hooks/useTareas.js";
 import { TIEMPOS_PERSONALIZADOS_INICIALES, NOMBRES_MODO } from "./config.js";
-import { formatearTiempo } from "./utilidades.js";
+import { formatearTiempo, obtenerDuracion } from "./utilidades.js";
 import PestanasModo from "./components/PestanasModo.jsx";
 import Temporizador from "./components/Temporizador.jsx";
 import Controles from "./components/Controles.jsx";
@@ -39,6 +39,9 @@ export default function App() {
       : "TaskTick";
   }, [enMarcha, segundosRestantes, modo]);
 
+  // true si el reloj está parado a mitad (ya había empezado a contar y no ha vuelto al inicio)
+  const enPausa = !enMarcha && segundosRestantes < obtenerDuracion(modo, preset, tiemposPersonalizados);
+
   // true mientras la ventana de personalizar está abierta
   const [ventanaAbierta, setVentanaAbierta] = useState(false);
 
@@ -63,7 +66,7 @@ export default function App() {
 
           <PestanasModo modo={modo} sesiones={sesiones} onCambiarModo={cambiarModo} />
 
-          <Temporizador segundos={segundosRestantes} modo={modo} />
+          <Temporizador segundos={segundosRestantes} modo={modo} enPausa={enPausa} />
 
           <Controles
             enMarcha={enMarcha}

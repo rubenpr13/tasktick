@@ -179,6 +179,11 @@ input:focus-visible {
   animation: pintar-subrayado 0.5s ease-out;
 }
 
+/* Parado a mitad: el subrayador se ve más claro, como si se hubiera gastado el rotulador */
+.tiempo.en-pausa .tiempo-numeros::before {
+  opacity: 0.4;
+}
+
 /* Única animación de la app: el subrayador se pinta de izquierda a derecha al cambiar de modo */
 @keyframes pintar-subrayado {
   from {
