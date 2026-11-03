@@ -36,6 +36,13 @@ Registro de lo que se ha hecho en Study App y de las decisiones tomadas. Las reg
 - El cursor de escritura "|" ya no aparece al pulsar en los textos (`caret-color: transparent` en `App.css`); solo se ve en los campos de minutos.
 - Añadido el servidor MCP Chrome DevTools en `.mcp.json` (alcance project). A petición de Rubén, `.mcp.json` está en `.gitignore` y no se sube a GitHub.
 
+### 2026-11-03: Lista de tareas
+- Nueva tarjeta "Tareas" junto al reloj (debajo en el móvil), con el mismo ancho. Todo decidido por Rubén antes de programar (reglas en `CLAUDE.md`).
+- Se puede añadir (+ o Enter), marcar como hecha (queda tachada en su sitio), editar con doble clic (Enter o pulsar fuera guardan, Escape cancela) y borrar con × sin confirmación. Máximo 100 caracteres; no se añaden tareas vacías.
+- Lógica en el hook `src/hooks/useTareas.js`; interfaz en `ListaTareas.jsx` (tarjeta, campo y lista) y `Tarea.jsx` (una fila). `LARGO_MAXIMO_TAREA` en `config.js`.
+- Las tareas solo viven en memoria, como los contadores.
+- `.app` ahora coloca las tarjetas con `flex-wrap`: cada tarjeta mide entre 360 y 480 px y, si no caben dos, la segunda baja.
+
 ## Decisiones pendientes de revisar
 Las tomé yo porque el encargo no las especificaba:
 - [ ] Al terminar el descanso largo se vuelve a Concentración.

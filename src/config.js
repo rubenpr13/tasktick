@@ -26,3 +26,8 @@ export const NOMBRES_MODO = {
   descansoCorto: "Descanso corto",
   descansoLargo: "Descanso largo",
 };
+
+// ----- Configuración de la lista de tareas -----
+
+// Número máximo de caracteres que puede tener el texto de una tarea
+export const LARGO_MAXIMO_TAREA = 100;

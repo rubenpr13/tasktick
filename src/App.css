@@ -41,16 +41,21 @@ button:focus-visible {
 }
 
 /* ----- Estructura ----- */
+/* Las tarjetas van una al lado de la otra si caben; si no, una debajo de otra */
 .app {
   min-height: 100vh;
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: flex-start;
   justify-content: center;
+  gap: 24px;
   padding: 16px;
 }
 
+/* Las dos tarjetas tienen el mismo ancho */
 .tarjeta {
-  width: 100%;
+  flex: 1 1 360px;
   max-width: 480px;
   background: var(--tarjeta);
   border-radius: 24px;
@@ -346,5 +351,131 @@ button:focus-visible {
 .campo-aviso {
   margin: 6px 0 0;
   font-size: 0.8rem;
+  color: #dc2626;
+}
+
+/* ----- Lista de tareas ----- */
+.tarjeta-tareas {
+  text-align: left;
+}
+
+.tarjeta-tareas .titulo {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.tareas-formulario {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.tareas-campo {
+  flex: 1;
+  min-width: 0;
+  padding: 12px 14px;
+  border: 1px solid var(--borde);
+  border-radius: 14px;
+  background: var(--fondo);
+  color: var(--texto);
+  font: inherit;
+}
+
+.tareas-campo:focus {
+  outline: none;
+  border-color: var(--acento);
+}
+
+.tareas-anadir {
+  flex: none;
+  width: 48px;
+  border: none;
+  border-radius: 14px;
+  background: var(--acento);
+  color: #ffffff;
+  font-size: 1.4rem;
+  line-height: 1;
+  transition: opacity 0.2s;
+}
+
+.tareas-anadir:hover {
+  opacity: 0.9;
+}
+
+.tareas-vacia {
+  margin: 24px 0 8px;
+  text-align: center;
+  color: var(--texto-suave);
+  font-size: 0.9rem;
+}
+
+.tareas-lista {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tarea {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 4px;
+  border-bottom: 1px solid var(--borde);
+}
+
+.tarea:last-child {
+  border-bottom: none;
+}
+
+.tarea-casilla {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  accent-color: var(--acento); /* la casilla marcada usa el color del modo */
+  cursor: pointer;
+}
+
+.tarea-texto {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere; /* parte las palabras muy largas en vez de salirse */
+  touch-action: manipulation; /* evita que el doble toque haga zoom en el móvil */
+}
+
+.tarea.hecha .tarea-texto {
+  color: var(--texto-suave);
+  text-decoration: line-through;
+}
+
+.tarea-campo {
+  flex: 1;
+  min-width: 0;
+  padding: 6px 10px;
+  border: 1px solid var(--acento);
+  border-radius: 10px;
+  background: var(--fondo);
+  color: var(--texto);
+  font: inherit;
+}
+
+.tarea-campo:focus {
+  outline: none;
+}
+
+.tarea-borrar {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--texto-suave);
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+.tarea-borrar:hover {
+  background: var(--fondo);
   color: #dc2626;
 }

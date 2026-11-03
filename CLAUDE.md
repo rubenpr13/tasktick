@@ -1,6 +1,6 @@
 # Study App
 
-Web para estudiar con la técnica Pomodoro. Hecha con Vite + React 18, en JavaScript (sin TypeScript) y con CSS normal.
+Web para estudiar con la técnica Pomodoro y una lista de tareas. Hecha con Vite + React 18, en JavaScript (sin TypeScript) y con CSS normal.
 
 Historial y decisiones pendientes de revisar: @MEMORY.md. Al terminar un cambio, añade una entrada con la fecha local al historial de ese archivo.
 
@@ -13,10 +13,11 @@ Historial y decisiones pendientes de revisar: @MEMORY.md. Al terminar un cambio,
 No hay tests ni linter configurados.
 
 ## Estructura
-- `src/App.jsx`: componente principal. Obtiene los datos y las acciones del reloj con `usePomodoro` y los pasa por props a los componentes
+- `src/App.jsx`: componente principal. Obtiene los datos y las acciones del reloj con `usePomodoro` y de las tareas con `useTareas`, y los pasa por props a los componentes
 - `src/hooks/usePomodoro.js`: toda la lógica del temporizador (estado, cuenta atrás, cambio de modo, sesiones y acciones)
-- `src/components/`: un archivo por cada parte de la interfaz (`PestanasModo`, `Temporizador`, `Controles`, `SelectorPreset`, `VentanaPersonalizar`, `CampoMinutos`). Muestran datos y avisan de los clics con props `onX` (por ejemplo `onCambiarModo`, decidido por Rubén el 2026-11-03). Solo `VentanaPersonalizar` tiene estado propio: lo que se va escribiendo antes de pulsar Guardar
-- `src/config.js`: presets, duración del descanso largo, tiempos iniciales de Personalizado, límites de minutos y nombres de los modos
+- `src/hooks/useTareas.js`: toda la lógica de la lista de tareas (`tareas`, `anadirTarea`, `alternarHecha`, `editarTarea`, `borrarTarea`)
+- `src/components/`: un archivo por cada parte de la interfaz (`PestanasModo`, `Temporizador`, `Controles`, `SelectorPreset`, `VentanaPersonalizar`, `CampoMinutos`, `ListaTareas`, `Tarea`). Muestran datos y avisan de los clics con props `onX` (por ejemplo `onCambiarModo`, decidido por Rubén el 2026-11-03). Solo tienen estado propio los que guardan lo que se va escribiendo: `VentanaPersonalizar` (antes de pulsar Guardar), `ListaTareas` (la tarea nueva antes de añadirla) y `Tarea` (si se está editando y el texto editado)
+- `src/config.js`: presets, duración del descanso largo, tiempos iniciales de Personalizado, límites de minutos, nombres de los modos y largo máximo de una tarea
 - `src/utilidades.js`: funciones de ayuda (`obtenerDuracion`, `formatearTiempo`)
 - `src/App.css`: todos los estilos; los colores son variables en `:root` y el acento cambia por modo (`.modo-foco`, `.modo-descansoCorto`, `.modo-descansoLargo`)
 - `src/main.jsx`: monta `<App />`
@@ -33,6 +34,15 @@ No hay tests ni linter configurados.
 - Cambiar de pestaña o de preset reinicia el tiempo y lo deja en pausa. Detener pausa y vuelve al inicio del modo actual.
 - El tiempo se calcula con la hora local del usuario (`Date.now()` y una hora de fin), nunca UTC ni hora del servidor. Así no se desfasa aunque la pestaña esté en segundo plano.
 - Los contadores y los tiempos personalizados viven en memoria y no se guardan.
+
+## Reglas de la lista de tareas (decididas por Rubén el 2026-11-03; no cambiarlas sin pedirlo)
+- Va en una tarjeta aparte, "Tareas": en el ordenador a la derecha del reloj y con el mismo ancho; en pantallas estrechas, debajo.
+- Añadir: campo "Nueva tarea…" y botón + (o Enter). Se quitan los espacios de los extremos, no se añaden tareas vacías y el máximo es 100 caracteres. La tarea nueva va al final.
+- Marcar como hecha con una casilla: la tarea se queda en su sitio, tachada y más clara.
+- Editar con doble clic en el texto: Enter o pulsar fuera guardan, Escape cancela. Si el texto queda vacío, vuelve el anterior.
+- Borrar con ×, al momento y sin confirmación.
+- Con la lista vacía se muestra "No hay tareas. Añade la primera."
+- Las tareas viven en memoria y se pierden al recargar. No hay contador de hechas ni relación con los pomodoros.
 
 ## Git y GitHub
 Repositorio público: https://github.com/rubenpr13/study-app (rama `master`, remoto `origin`).

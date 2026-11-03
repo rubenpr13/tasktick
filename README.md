@@ -1,6 +1,6 @@
 # Study App
 
-Web para estudiar con la **técnica Pomodoro**: alterna bloques de concentración con descansos cortos para estudiar sin agotarte.
+Web para estudiar con la **técnica Pomodoro**: alterna bloques de concentración con descansos cortos para estudiar sin agotarte. Incluye una **lista de tareas** para apuntar lo que vas a estudiar.
 
 ## Funcionalidades
 
@@ -15,6 +15,7 @@ Web para estudiar con la **técnica Pomodoro**: alterna bloques de concentració
 - **Descanso largo** de 30 minutos (en Corto y Largo), que solo se activa a mano desde su pestaña.
 - **Controles**: Play / Pausa, Detener (vuelve al inicio del modo actual) y ⚙ para personalizar los tiempos.
 - **Tiempos personalizados**: el botón ⚙ abre una ventana para elegir los minutos de concentración, descanso corto y descanso largo (de 1 a 120). Al guardar aparece el preset **Personalizado** con esos tiempos. No se guardan al recargar la página.
+- **Lista de tareas** en una tarjeta junto al reloj (debajo en el móvil): añade tareas con + o Enter, márcalas como hechas, edítalas con doble clic (Enter o pulsar fuera guarda, Escape cancela) y bórralas con ×. Las tareas no se guardan al recargar la página.
 
 ## Tecnologías
 
@@ -58,17 +59,20 @@ study-app/
     ├── main.jsx          # Punto de entrada: monta el componente App
     ├── App.jsx           # Componente principal: monta la interfaz
     ├── App.css           # Estilos
-    ├── config.js         # Presets, descanso largo, límites de minutos y nombres de los modos
+    ├── config.js         # Presets, descanso largo, límites de minutos, nombres de los modos y largo máximo de una tarea
     ├── utilidades.js     # Funciones de ayuda (duración de un modo, formato MM:SS)
     ├── hooks/
-    │   └── usePomodoro.js  # Lógica del temporizador
+    │   ├── usePomodoro.js  # Lógica del temporizador
+    │   └── useTareas.js    # Lógica de la lista de tareas
     └── components/       # Componentes de la interfaz
         ├── PestanasModo.jsx    # Pestañas de modo con su contador de sesiones
         ├── Temporizador.jsx    # Tiempo restante
         ├── Controles.jsx       # Botones Play/Pausa, Detener y ⚙
         ├── SelectorPreset.jsx  # Botones de los presets Corto, Largo y Personalizado
         ├── VentanaPersonalizar.jsx  # Ventana para personalizar los tiempos
-        └── CampoMinutos.jsx    # Campo de minutos con botones − y +
+        ├── CampoMinutos.jsx    # Campo de minutos con botones − y +
+        ├── ListaTareas.jsx     # Tarjeta de tareas: campo para añadir y lista
+        └── Tarea.jsx           # Una tarea: casilla, texto editable y botón ×
 ```
 
 ## Detalles técnicos
