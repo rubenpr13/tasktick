@@ -175,11 +175,6 @@ button:focus-visible {
   transition: border-color 0.2s;
 }
 
-.preset span {
-  font-size: 0.75rem;
-  color: var(--texto-suave);
-}
-
 .preset:hover {
   border-color: var(--texto-suave);
 }
@@ -205,6 +200,16 @@ button:focus-visible {
   .boton {
     min-width: 0;
     flex: 1;
+  }
+
+  /* Los tres presets caben en una fila */
+  .preset {
+    padding: 12px 8px;
+    font-size: 0.85rem;
+  }
+
+  .preset.activo {
+    padding: 11px 7px; /* compensa el borde más grueso */
   }
 }
 
@@ -336,15 +341,4 @@ button:focus-visible {
   margin: 6px 0 0;
   font-size: 0.8rem;
   color: #dc2626;
-}
-
-/* ----- Móvil: el preset Personalizado ocupa su propia fila ----- */
-@media (max-width: 420px) {
-  .presets {
-    flex-wrap: wrap;
-  }
-
-  .preset-personalizado {
-    flex-basis: 100%;
-  }
 }

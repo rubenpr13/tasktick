@@ -24,7 +24,8 @@ No hay tests ni linter configurados.
 ## Reglas del temporizador (no cambiarlas sin pedirlo)
 - Cuenta atrás hasta `00:00`. Al abrir o recargar la web se muestra Concentración con 25:00 en pausa; solo empieza al pulsar Play (cambiado por Rubén el 2026-10-29).
 - Presets: Corto = 25 min de foco / 5 min de descanso; Largo = 50 / 10. En Corto y Largo el Descanso largo dura siempre 30 min. El Descanso largo solo se activa a mano.
-- Personalizar (decidido por Rubén el 2026-11-03): el botón ⚙ junto a Play/Detener abre una ventana centrada con Concentración, Descanso corto y Descanso largo (campo numérico con − y +, de 1 a 120 min). Se abre con los últimos tiempos guardados (al principio 25 / 5 / 30). Solo se aplica al pulsar Guardar, y no deja guardar si un valor no es válido. Se cierra sin guardar con Cancelar, pulsando fuera o con Escape.
+- Personalizar (decidido por Rubén el 2026-11-03): el botón ⚙ junto a Play/Detener abre una ventana centrada con Concentración, Descanso corto y Descanso largo (campo de texto que solo admite dígitos, sin flechas, con botones − y +; de 1 a 120 min). Se abre con los últimos tiempos guardados (al principio 25 / 5 / 30). Solo se aplica al pulsar Guardar, y no deja guardar si un valor no es válido. Se cierra sin guardar con Cancelar, pulsando fuera o con Escape.
+- Los botones de preset solo muestran el nombre (Corto, Largo, Personalizado), sin subtítulo; en el móvil los tres van en una fila.
 - Al guardar aparece y se activa un tercer preset "Personalizado" con esos tiempos (incluido el Descanso largo, que solo cambia en este preset); el modo actual se reinicia con su nueva duración y queda en pausa.
 - Al llegar a 00:00 se pasa de Concentración a Descanso corto, y de cualquier descanso a Concentración. El nuevo modo queda en pausa hasta pulsar Play (cambiado por Rubén el 2026-10-29).
 - Una sesión solo se suma cuando el temporizador termina, nunca al pausar, detener o cambiar de modo.

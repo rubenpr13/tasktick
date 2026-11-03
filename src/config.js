@@ -2,7 +2,7 @@
 
 // Presets: nombre que se ve en pantalla y duraciones en minutos
 export const PRESETS = {
-  corto: { nombre: "Corto", foco: 1, descanso: 5 },
+  corto: { nombre: "Corto", foco: 25, descanso: 5 },
   largo: { nombre: "Largo", foco: 50, descanso: 10 },
 };
 

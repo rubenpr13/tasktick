@@ -4,6 +4,7 @@ import { MINUTOS_MINIMO, MINUTOS_MAXIMO } from "../config.js";
 // Props:
 // - etiqueta: texto que se ve encima (por ejemplo "Concentración")
 // - valor: lo que hay escrito en el campo (texto, puede estar vacío mientras se escribe)
+//   Solo admite dígitos y no tiene flechas: se cambia escribiendo o con − y +
 // - esValido: false si el valor está fuera de los límites; entonces se marca en rojo
 // - onCambiar: función que se llama con el nuevo valor (texto)
 export default function CampoMinutos({ etiqueta, valor, esValido, onCambiar }) {
@@ -27,14 +28,13 @@ export default function CampoMinutos({ etiqueta, valor, esValido, onCambiar }) {
           −
         </button>
         <input
-          type="number"
+          type="text"
           inputMode="numeric"
-          min={MINUTOS_MINIMO}
-          max={MINUTOS_MAXIMO}
-          step="1"
+          maxLength={3}
           aria-label={`${etiqueta} (minutos)`}
           value={valor}
-          onChange={(evento) => onCambiar(evento.target.value)}
+          // Quita todo lo que no sea un dígito (letras, puntos, signos…)
+          onChange={(evento) => onCambiar(evento.target.value.replace(/\D/g, ""))}
         />
         <span className="campo-unidad">min</span>
         <button
