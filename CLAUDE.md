@@ -44,7 +44,7 @@ No hay tests ni linter configurados.
 - Los contadores y los tiempos personalizados viven en memoria y no se guardan (confirmado por Rubén el 2026-11-03).
 
 ## Reglas de la lista de tareas (decididas por Rubén el 2026-11-03; no cambiarlas sin pedirlo)
-- Va en una columna aparte, con el título "To Do List": en el ordenador a la derecha del reloj, con el mismo ancho y separada por la línea de margen; en pantallas estrechas, debajo.
+- Va en una columna aparte, con el título "To Do List": desde 760 px de ancho (tablet y ordenador) a la derecha del reloj, con el mismo ancho y separada por la línea de margen; en pantallas más estrechas, debajo. En dos columnas el reloj se reduce para caber (`clamp(80px, 12vw, 140px)`) y entre 760 y 999 px el hueco entre columnas es de 1 cuadro (decidido por Rubén el 2026-11-03).
 - Añadir: campo "Nueva tarea…" y botón + (o Enter). Se quitan los espacios de los extremos, no se añaden tareas vacías y el máximo es 100 caracteres. La tarea nueva va al final.
 - Marcar como hecha con una casilla: la tarea se queda en su sitio, tachada y más clara.
 - Editar con doble clic en el texto: Enter o pulsar fuera guardan, Escape cancela. Si el texto queda vacío, vuelve el anterior.
@@ -59,7 +59,7 @@ No hay tests ni linter configurados.
 - Lo llamativo es solo el reloj, con el trazo de subrayador detrás. Única animación: el subrayador se pinta de izquierda a derecha al cambiar de modo (no se anima si el sistema pide reducir el movimiento).
 - En pausa a mitad de una cuenta el subrayador del reloj se ve más claro (opacidad 0,4), sin animación (pedido por Rubén el 2026-11-03).
 - Cabecera (2026-11-03): la casilla marcada de las tareas + "TaskTick" en Lexend 800 a 24 px y en tinta, sobre una línea de margen roja de 2 px tan ancha como la hoja. Sin subrayador: lo llamativo sigue siendo el reloj.
-- Pestañas y presets son palabras sueltas: la pestaña activa lleva el subrayador; el preset activo, un subrayado en tinta. Contador de sesiones: número pequeño en el mismo renglón. En el móvil (≤ 420 px) las pestañas van a 13 px para caber en una fila.
+- Pestañas y presets son palabras sueltas: la pestaña activa lleva el subrayador; el preset activo, un subrayado en tinta. Contador de sesiones: número pequeño en el mismo renglón. En el móvil (≤ 420 px) y en la tablet (760-999 px) las pestañas van a 13 px para caber en una fila.
 - Botones con esquinas de 6 px: Play y + en bloque de tinta; Detener, el engranaje y Cancelar con borde de tinta. La ventana de Personalizar es una hoja cuadriculada con borde de tinta.
 - Tareas: casilla de un cuadro con ✓ en tinta; las hechas se tachan en boli rojo.
 

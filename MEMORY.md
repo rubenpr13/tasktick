@@ -102,6 +102,11 @@ Registro de lo que se ha hecho en TaskTick (antes Study App) y de las decisiones
 ### 2026-11-03: Aviso de "en pausa"
 - A petición de Rubén, si el reloj está parado a mitad (ya había contado algo), el subrayador del reloj se ve más claro (opacidad 0,4). Al abrir la web, tras Detener o al cambiar de modo o preset está al inicio y se ve normal. `App.jsx` calcula `enPausa` y se lo pasa a `Temporizador`. Sin animación, para no añadir otra.
 
+### 2026-11-03: Dos columnas en la tablet
+- A petición de Rubén, las dos columnas empiezan en 760 px (antes en 860), así la tablet de 768 px ya no deja media pantalla vacía. En dos columnas el reloj mide `clamp(80px, 12vw, 140px)`: 92 px a 768 y 140 px desde unos 1170.
+- Las pestañas no cabían en una fila entre 760 y unos 950 px (ya pasaba antes entre 860 y 950). Rubén eligió la solución del móvil: entre 760 y 999 px van a 13 px con 8 px de separación, y el hueco entre columnas baja a 1 cuadro.
+- Comprobado a 390, 768, 820, 900, 999, 1000, 1100 y 1440 px: pestañas en una fila, el reloj cabe en su columna y no hay desplazamiento lateral.
+
 ## Decisiones pendientes de revisar
 Las tomé yo porque el encargo no las especificaba:
 - [x] Al terminar el descanso largo se vuelve a Concentración. Confirmado por Rubén el 2026-11-03.

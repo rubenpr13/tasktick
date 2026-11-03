@@ -402,15 +402,36 @@ input:focus-visible {
 }
 
 /* ----- Ordenador: reloj a la izquierda y tareas a la derecha, con la línea de margen en medio ----- */
-@media (min-width: 860px) {
+@media (min-width: 760px) {
   .hoja {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     column-gap: calc(var(--cuadro) * 2);
   }
 
+  /* El reloj crece con la pantalla para caber en media hoja (92 px en una tablet de 768, 140 px desde 1170) */
+  .tiempo {
+    font-size: clamp(80px, 12vw, 140px);
+  }
+
   .columna-tareas {
     padding-left: calc(var(--cuadro) * 2);
     border-left: 2px solid var(--margen);
+  }
+}
+
+/* ----- Tablet (dos columnas estrechas): pestañas como en el móvil para que quepan en una fila ----- */
+@media (min-width: 760px) and (max-width: 999px) {
+  .hoja {
+    column-gap: var(--cuadro);
+  }
+
+  .pestana {
+    padding: 0 3px;
+    font-size: 13px;
+  }
+
+  .pestanas {
+    column-gap: 8px;
   }
 }
 
