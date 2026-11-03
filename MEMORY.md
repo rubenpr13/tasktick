@@ -33,6 +33,7 @@ Registro de lo que se ha hecho en Study App y de las decisiones tomadas. Las reg
 - Todo decidido por Rubén antes de programar: preset aparte "Personalizado" que aparece al guardar, se aplica al pulsar Guardar, al guardar el modo actual se reinicia en pausa, el descanso largo personalizado solo vale en ese preset, se cierra con Cancelar / pulsando fuera / Escape, y no se guarda al recargar.
 - Lógica en `usePomodoro` (`tiemposPersonalizados`, `guardarTiemposPersonalizados`); `obtenerDuracion` recibe los tiempos personalizados. En móvil, el preset Personalizado ocupa su propia fila.
 - Ajustes estéticos pedidos por Rubén: los presets solo muestran el nombre (sin subtítulo con los minutos) y en el móvil van los tres en una fila; el campo de minutos pasa a ser de texto, solo admite dígitos y no tiene flechas (se cambia escribiendo o con − y +).
+- El cursor de escritura "|" ya no aparece al pulsar en los textos (`caret-color: transparent` en `App.css`); solo se ve en los campos de minutos.
 
 ## Decisiones pendientes de revisar
 Las tomé yo porque el encargo no las especificaba:
