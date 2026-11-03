@@ -2,6 +2,25 @@
    La app es una hoja de cuaderno cuadriculado (cuadros de 20 px) y el modo activo
    se marca con un trazo de subrayador detrás del texto. Todo encaja en los cuadros. */
 
+/* ----- Fuentes -----
+   Los archivos están en public/fonts (descargados de Google Fonts, licencia OFL), así los visitantes
+   no se conectan a Google. Solo caracteres latinos (incluye á, é, ñ, ü…), que es lo que usa la app. */
+@font-face {
+  font-family: "Atkinson Hyperlegible Next";
+  font-style: normal;
+  font-weight: 400 700; /* un solo archivo "variable" sirve para el normal (400) y la negrita (700) */
+  font-display: swap;
+  src: url("/fonts/atkinson-hyperlegible-next-latin.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Lexend";
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("/fonts/lexend-latin.woff2") format("woff2");
+}
+
 /* ----- Colores y medidas ----- */
 :root {
   --papel: #f7f9fb;

@@ -12,13 +12,9 @@
     <meta property="og:description" content="Estudia con la técnica Pomodoro y organiza tus tareas en una hoja de cuaderno." />
     <!-- Icono de la pestaña: la casilla marcada, igual que en la cabecera (está en public/) -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <!-- Fuentes de Google Fonts: Atkinson Hyperlegible Next (textos) y Lexend (reloj). Sin internet se usa la del sistema -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700&family=Lexend:wght@800&display=swap"
-    />
+    <!-- Fuentes dentro de la propia web (public/fonts): se cargan antes para que el reloj no cambie de letra al abrir -->
+    <link rel="preload" href="/fonts/atkinson-hyperlegible-next-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/lexend-latin.woff2" as="font" type="font/woff2" crossorigin />
   </head>
   <body>
     <!-- Aquí React dibuja toda la aplicación -->
