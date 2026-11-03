@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { CLAVES_GUARDADO } from "../config.js";
 import { fechaDeHoy, guardar, leerGuardado, obtenerDuracion } from "../utilidades.js";
+import { prepararSonido, sonarCampanita } from "../sonido.js";
 
 // Sesiones de un día en el que aún no se ha terminado ninguna
 const SIN_SESIONES = { foco: 0, descansoCorto: 0, descansoLargo: 0 };
@@ -56,6 +57,9 @@ export default function usePomodoro() {
   useEffect(() => {
     if (segundosRestantes > 0) return;
 
+    // Aviso: suena una campanita
+    sonarCampanita();
+
     // Solo aquí se suma la sesión: cuando el temporizador ha terminado. Se apunta en el día de hoy
     setHistorial((anterior) => {
       const hoy = fechaDeHoy();
@@ -75,6 +79,7 @@ export default function usePomodoro() {
   // ----- Acciones -----
 
   function alternarPlayPausa() {
+    prepararSonido(); // para que la campanita pueda sonar al llegar a 00:00
     setEnMarcha(!enMarcha);
   }
 
