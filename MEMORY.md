@@ -47,6 +47,14 @@ Registro de lo que se ha hecho en Study App y de las decisiones tomadas. Las reg
 - Rubén revisa las cuatro decisiones que quedaban y las confirma tal como están: al terminar el descanso largo se vuelve a Concentración; cambiar de pestaña o de preset reinicia y deja en pausa; Detener pausa y vuelve al inicio del modo sin sumar sesión; los contadores no se guardan al recargar.
 - El código no cambia; solo se actualizan `CLAUDE.md` y `MEMORY.md`.
 
+### 2026-11-03: Plan de rediseño "cuaderno + subrayador" (aprobado, sin programar)
+- Hecho con la skill `frontend-design`. Encargo confirmado por Rubén: la usa él para preparar la prueba de acceso, en ordenador y móvil; lo importante es ver el tiempo y la tarea sin distraerse. Libertad total de diseño; se permite cargar fuentes de Google Fonts.
+- Idea: la app es una hoja de cuaderno cuadriculado y el modo activo se marca con un trazo de subrayador detrás del texto. Sin tarjetas ni sombras; todo alineado a la izquierda y encajado en cuadros de 20 px.
+- Colores: papel `#F7F9FB`, cuadrícula `#D6E0EA`, tinta `#1E2A3A`, tinta suave `#5B6B7F`, boli rojo `#D64545` (tachado y × al pasar el ratón), margen rojo suave `#E7A3A3`. Subrayadores: Concentración `#FFE14D`, Descanso corto `#9BE7A0`, Descanso largo `#9CC9FF`; siempre detrás de texto oscuro, nunca como color de letra.
+- Tipografía: Atkinson Hyperlegible Next (textos, 16 px; títulos 20 px) y Atkinson Hyperlegible Mono en negrita (reloj). Sin mayúsculas en etiquetas.
+- Distribución: en el ordenador, reloj a la izquierda y tareas a la derecha, separados por la línea de margen roja; en el móvil, una columna. Pestañas como palabras sueltas, la activa subrayada; contador de sesiones como número pequeño (elegido por Rubén, no palotes). Botones con esquinas de 6 px: Play en bloque de tinta, Detener y ⚙ con borde. Filas de tareas de 2 cuadros; casilla con ✓ en tinta y tachado en boli rojo.
+- Principios: lo atrevido solo en el reloj (subrayado detrás del tiempo); una sola animación (el subrayador se pinta de izquierda a derecha al cambiar de modo, sin animar si se pide reducir el movimiento); foco visible y bien en el móvil.
+
 ## Decisiones pendientes de revisar
 Las tomé yo porque el encargo no las especificaba:
 - [x] Al terminar el descanso largo se vuelve a Concentración. Confirmado por Rubén el 2026-11-03.
