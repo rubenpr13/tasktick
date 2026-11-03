@@ -2,8 +2,10 @@ import { PRESETS, DESCANSO_LARGO } from "./config.js";
 
 // ----- Funciones de ayuda -----
 
-// Devuelve cuántos segundos dura un modo según el preset elegido
-export function obtenerDuracion(modo, preset) {
+// Devuelve cuántos segundos dura un modo según el preset elegido.
+// Con el preset "personalizado" usa los tiempos que ha guardado el usuario.
+export function obtenerDuracion(modo, preset, tiemposPersonalizados) {
+  if (preset === "personalizado") return tiemposPersonalizados[modo] * 60;
   if (modo === "foco") return PRESETS[preset].foco * 60;
   if (modo === "descansoCorto") return PRESETS[preset].descanso * 60;
   return DESCANSO_LARGO * 60;

@@ -28,6 +28,11 @@ Registro de lo que se ha hecho en Study App y de las decisiones tomadas. Las reg
 - Revisado por Rubén: la lógica del reloj pasa al hook `src/hooks/usePomodoro.js`, los estilos se quedan en `App.css` y las props de los componentes se llaman `onX` (`onCambiarModo`, `onPlayPausa`, `onDetener`, `onCambiarPreset`).
 - Nueva regla en `CLAUDE.md`: no tomar decisiones propias; preguntar siempre antes, en todo.
 
+### 2026-11-03: Personalizar tiempos
+- Botón ⚙ junto a Play/Detener que abre una ventana centrada (`VentanaPersonalizar`) con tres campos (`CampoMinutos`: número con − y +, de 1 a 120 min) para Concentración, Descanso corto y Descanso largo.
+- Todo decidido por Rubén antes de programar: preset aparte "Personalizado" que aparece al guardar, se aplica al pulsar Guardar, al guardar el modo actual se reinicia en pausa, el descanso largo personalizado solo vale en ese preset, se cierra con Cancelar / pulsando fuera / Escape, y no se guarda al recargar.
+- Lógica en `usePomodoro` (`tiemposPersonalizados`, `guardarTiemposPersonalizados`); `obtenerDuracion` recibe los tiempos personalizados. En móvil, el preset Personalizado ocupa su propia fila.
+
 ## Decisiones pendientes de revisar
 Las tomé yo porque el encargo no las especificaba:
 - [ ] Al terminar el descanso largo se vuelve a Concentración.

@@ -12,8 +12,9 @@ Web para estudiar con la **técnica Pomodoro**: alterna bloques de concentració
   | Corto | 25 min | 5 min |
   | Largo | 50 min | 10 min |
 - **Pestañas de modo** (Concentración, Descanso corto y Descanso largo), cada una con un contador de las sesiones completadas. Una sesión solo cuenta cuando el temporizador llega a `00:00`.
-- **Descanso largo** de 30 minutos, que solo se activa a mano desde su pestaña.
-- **Controles**: Play / Pausa y Detener (vuelve al inicio del modo actual).
+- **Descanso largo** de 30 minutos (en Corto y Largo), que solo se activa a mano desde su pestaña.
+- **Controles**: Play / Pausa, Detener (vuelve al inicio del modo actual) y ⚙ para personalizar los tiempos.
+- **Tiempos personalizados**: el botón ⚙ abre una ventana para elegir los minutos de concentración, descanso corto y descanso largo (de 1 a 120). Al guardar aparece el preset **Personalizado** con esos tiempos. No se guardan al recargar la página.
 
 ## Tecnologías
 
@@ -57,15 +58,17 @@ study-app/
     ├── main.jsx          # Punto de entrada: monta el componente App
     ├── App.jsx           # Componente principal: monta la interfaz
     ├── App.css           # Estilos
-    ├── config.js         # Presets, descanso largo y nombres de los modos
+    ├── config.js         # Presets, descanso largo, límites de minutos y nombres de los modos
     ├── utilidades.js     # Funciones de ayuda (duración de un modo, formato MM:SS)
     ├── hooks/
     │   └── usePomodoro.js  # Lógica del temporizador
     └── components/       # Componentes de la interfaz
         ├── PestanasModo.jsx    # Pestañas de modo con su contador de sesiones
         ├── Temporizador.jsx    # Tiempo restante
-        ├── Controles.jsx       # Botones Play/Pausa y Detener
-        └── SelectorPreset.jsx  # Botones de los presets Corto y Largo
+        ├── Controles.jsx       # Botones Play/Pausa, Detener y ⚙
+        ├── SelectorPreset.jsx  # Botones de los presets Corto, Largo y Personalizado
+        ├── VentanaPersonalizar.jsx  # Ventana para personalizar los tiempos
+        └── CampoMinutos.jsx    # Campo de minutos con botones − y +
 ```
 
 ## Detalles técnicos

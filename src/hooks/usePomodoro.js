@@ -11,6 +11,8 @@ export default function usePomodoro() {
   const [segundosRestantes, setSegundosRestantes] = useState(obtenerDuracion("foco", "corto"));
   const [enMarcha, setEnMarcha] = useState(false); // false = espera a que el usuario pulse Play
   const [sesiones, setSesiones] = useState({ foco: 0, descansoCorto: 0, descansoLargo: 0 });
+  // Tiempos del preset Personalizado; null hasta que el usuario los guarde por primera vez
+  const [tiemposPersonalizados, setTiemposPersonalizados] = useState(null);
 
   // 1) Cuenta atrás: mientras esté en marcha, se actualiza cada segundo.
   // Guardamos la hora local de fin y calculamos lo que falta con Date.now().
@@ -40,7 +42,7 @@ export default function usePomodoro() {
     // Concentración -> Descanso corto; cualquier descanso -> Concentración
     const siguienteModo = modo === "foco" ? "descansoCorto" : "foco";
     setModo(siguienteModo);
-    setSegundosRestantes(obtenerDuracion(siguienteModo, preset));
+    setSegundosRestantes(obtenerDuracion(siguienteModo, preset, tiemposPersonalizados));
 
     // El nuevo modo queda en pausa hasta que el usuario pulse Play
     setEnMarcha(false);
@@ -54,19 +56,28 @@ export default function usePomodoro() {
 
   function detener() {
     setEnMarcha(false);
-    setSegundosRestantes(obtenerDuracion(modo, preset));
+    setSegundosRestantes(obtenerDuracion(modo, preset, tiemposPersonalizados));
   }
 
   function cambiarModo(nuevoModo) {
     setEnMarcha(false);
     setModo(nuevoModo);
-    setSegundosRestantes(obtenerDuracion(nuevoModo, preset));
+    setSegundosRestantes(obtenerDuracion(nuevoModo, preset, tiemposPersonalizados));
   }
 
   function cambiarPreset(nuevoPreset) {
     setEnMarcha(false);
     setPreset(nuevoPreset);
-    setSegundosRestantes(obtenerDuracion(modo, nuevoPreset));
+    setSegundosRestantes(obtenerDuracion(modo, nuevoPreset, tiemposPersonalizados));
+  }
+
+  // Guarda los tiempos personalizados (en minutos), activa el preset Personalizado
+  // y reinicia el modo actual con su nueva duración, en pausa
+  function guardarTiemposPersonalizados(nuevosTiempos) {
+    setEnMarcha(false);
+    setTiemposPersonalizados(nuevosTiempos);
+    setPreset("personalizado");
+    setSegundosRestantes(obtenerDuracion(modo, "personalizado", nuevosTiempos));
   }
 
   // Lo que pueden usar los componentes: los datos y las acciones
@@ -76,9 +87,11 @@ export default function usePomodoro() {
     segundosRestantes,
     enMarcha,
     sesiones,
+    tiemposPersonalizados,
     alternarPlayPausa,
     detener,
     cambiarModo,
     cambiarPreset,
+    guardarTiemposPersonalizados,
   };
 }
