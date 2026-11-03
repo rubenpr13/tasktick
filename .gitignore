@@ -6,3 +6,6 @@ dist/
 
 # Ajustes personales de Claude Code (rutas de este ordenador)
 .claude/settings.local.json
+
+# Servidores MCP de Claude Code (configuración personal, no se sube)
+.mcp.json

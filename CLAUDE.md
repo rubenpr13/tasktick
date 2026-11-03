@@ -20,6 +20,7 @@ No hay tests ni linter configurados.
 - `src/utilidades.js`: funciones de ayuda (`obtenerDuracion`, `formatearTiempo`)
 - `src/App.css`: todos los estilos; los colores son variables en `:root` y el acento cambia por modo (`.modo-foco`, `.modo-descansoCorto`, `.modo-descansoLargo`)
 - `src/main.jsx`: monta `<App />`
+- `.mcp.json`: servidores MCP de Claude Code (ahora `chrome-devtools`, para abrir y probar la app en Chrome). Es personal: está en `.gitignore` y no se sube (decidido por Rubén el 2026-11-03)
 
 ## Reglas del temporizador (no cambiarlas sin pedirlo)
 - Cuenta atrás hasta `00:00`. Al abrir o recargar la web se muestra Concentración con 25:00 en pausa; solo empieza al pulsar Play (cambiado por Rubén el 2026-10-29).
@@ -37,7 +38,7 @@ No hay tests ni linter configurados.
 Repositorio público: https://github.com/rubenpr13/study-app (rama `master`, remoto `origin`).
 - **Subir siempre lo que se modifica (pedido por Rubén el 2026-10-29):** al terminar cada cambio que funcione, haz un commit y un `git push` sin esperar a que te lo pidan. No hace falta preguntar antes.
 - Un commit por cambio, con el mensaje en español, en imperativo y explicando qué se ha hecho.
-- Antes de cada commit, revisa `git status`: nunca subas `node_modules/`, `dist/`, `.claude/settings.local.json` ni claves o contraseñas.
+- Antes de cada commit, revisa `git status`: nunca subas `node_modules/`, `dist/`, `.claude/settings.local.json`, `.mcp.json` ni claves o contraseñas.
 
 ## Segundo cerebro (vault de Obsidian)
 Vault: `C:\Users\ruben\iCloudDrive\iCloud~md~obsidian\Rpinazo`. Antes de escribir en él, lee su `AGENTS.md` y sigue sus reglas (plantilla, propiedades, carpetas sensibles…).
