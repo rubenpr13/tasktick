@@ -19,6 +19,13 @@ Registro de lo que se ha hecho en Study App y de las decisiones tomadas. Las reg
 - Corregido: el temporizador ya no arranca solo al abrir o recargar la página; espera a que se pulse Play. Cambia el requisito inicial ("que empiece automático"). Tras un cambio automático de modo sigue arrancando solo.
 - Cambiado después: tras un cambio automático de modo, el temporizador también queda en pausa hasta pulsar Play.
 
+### 2026-11-03: Componentes
+- `App.jsx` dividido en componentes para que el proyecto sea escalable: `PestanasModo`, `Temporizador`, `Controles` y `SelectorPreset` en `src/components/`.
+- La configuración pasa a `src/config.js` y las funciones de ayuda a `src/utilidades.js`.
+- El estado y la lógica siguen en `App`, que los pasa por props; los componentes no tienen estado propio.
+- Los textos de los presets ("25 min foco · 5 min descanso") ahora salen de `PRESETS`, que incluye el nombre de cada preset.
+- El funcionamiento y el aspecto de la app no cambian.
+
 ## Decisiones pendientes de revisar
 Las tomé yo porque el encargo no las especificaba:
 - [ ] Al terminar el descanso largo se vuelve a Concentración.
@@ -26,5 +33,6 @@ Las tomé yo porque el encargo no las especificaba:
 - [ ] Cambiar de pestaña o de preset reinicia el tiempo y lo deja en pausa.
 - [ ] Detener pausa y vuelve al inicio del modo actual, sin sumar sesión.
 - [ ] Los contadores no se guardan al recargar la página.
+- [ ] Componentes: el estado sigue en `App` (no en un hook propio), los estilos siguen todos en `App.css` y los archivos y props van en español (`alCambiarModo`…).
 
 Cuando revises una, márcala con `[x]` o pide el cambio, y actualizaré también `CLAUDE.md`.

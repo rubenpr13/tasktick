@@ -13,7 +13,10 @@ Historial y decisiones pendientes de revisar: @MEMORY.md. Al terminar un cambio,
 No hay tests ni linter configurados.
 
 ## Estructura
-- `src/App.jsx`: toda la lógica y la interfaz, en un único componente
+- `src/App.jsx`: componente principal. Guarda el estado y la lógica del temporizador y se los pasa por props a los componentes
+- `src/components/`: un archivo por cada parte de la interfaz (`PestanasModo`, `Temporizador`, `Controles`, `SelectorPreset`). Solo muestran datos y avisan de los clics con funciones `al...` (por ejemplo `alCambiarModo`); no tienen estado propio
+- `src/config.js`: presets, duración del descanso largo y nombres de los modos
+- `src/utilidades.js`: funciones de ayuda (`obtenerDuracion`, `formatearTiempo`)
 - `src/App.css`: todos los estilos; los colores son variables en `:root` y el acento cambia por modo (`.modo-foco`, `.modo-descansoCorto`, `.modo-descansoLargo`)
 - `src/main.jsx`: monta `<App />`
 

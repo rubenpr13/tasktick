@@ -54,9 +54,16 @@ study-app/
 ├── vite.config.js    # Configuración de Vite
 ├── package.json      # Dependencias y comandos
 └── src/
-    ├── main.jsx      # Punto de entrada: monta el componente App
-    ├── App.jsx       # Lógica del temporizador e interfaz
-    └── App.css       # Estilos
+    ├── main.jsx          # Punto de entrada: monta el componente App
+    ├── App.jsx           # Componente principal: estado y lógica del temporizador
+    ├── App.css           # Estilos
+    ├── config.js         # Presets, descanso largo y nombres de los modos
+    ├── utilidades.js     # Funciones de ayuda (duración de un modo, formato MM:SS)
+    └── components/       # Componentes de la interfaz
+        ├── PestanasModo.jsx    # Pestañas de modo con su contador de sesiones
+        ├── Temporizador.jsx    # Tiempo restante
+        ├── Controles.jsx       # Botones Play/Pausa y Detener
+        └── SelectorPreset.jsx  # Botones de los presets Corto y Largo
 ```
 
 ## Detalles técnicos

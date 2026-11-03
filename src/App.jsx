@@ -1,40 +1,12 @@
 import { useEffect, useState } from "react";
-
-// ----- Configuración -----
-
-// Duraciones (en minutos) de cada preset
-const PRESETS = {
-  corto: { foco: 25, descanso: 5 },
-  largo: { foco: 50, descanso: 10 },
-};
-
-// El descanso largo siempre dura 30 minutos
-const DESCANSO_LARGO = 30;
-
-// Nombre que se ve en pantalla para cada modo
-const NOMBRES_MODO = {
-  foco: "Concentración",
-  descansoCorto: "Descanso corto",
-  descansoLargo: "Descanso largo",
-};
-
-// ----- Funciones de ayuda -----
-
-// Devuelve cuántos segundos dura un modo según el preset elegido
-function obtenerDuracion(modo, preset) {
-  if (modo === "foco") return PRESETS[preset].foco * 60;
-  if (modo === "descansoCorto") return PRESETS[preset].descanso * 60;
-  return DESCANSO_LARGO * 60;
-}
-
-// Convierte segundos en texto "MM:SS" (por ejemplo 1500 -> "25:00")
-function formatearTiempo(segundos) {
-  const minutos = Math.floor(segundos / 60);
-  const resto = segundos % 60;
-  return `${String(minutos).padStart(2, "0")}:${String(resto).padStart(2, "0")}`;
-}
+import { obtenerDuracion } from "./utilidades.js";
+import PestanasModo from "./components/PestanasModo.jsx";
+import Temporizador from "./components/Temporizador.jsx";
+import Controles from "./components/Controles.jsx";
+import SelectorPreset from "./components/SelectorPreset.jsx";
 
 // ----- Componente principal -----
+// Guarda el estado y la lógica del temporizador, y se lo pasa a cada componente por props.
 
 export default function App() {
   const [preset, setPreset] = useState("corto");
@@ -107,50 +79,17 @@ export default function App() {
       <div className="tarjeta">
         <h1 className="titulo">Study App</h1>
 
-        {/* Pestañas de modo con su contador de sesiones */}
-        <nav className="pestanas">
-          {Object.keys(NOMBRES_MODO).map((clave) => (
-            <button
-              key={clave}
-              className={`pestana ${modo === clave ? "activa" : ""}`}
-              onClick={() => cambiarModo(clave)}
-            >
-              {NOMBRES_MODO[clave]}
-              <span className="contador">{sesiones[clave]}</span>
-            </button>
-          ))}
-        </nav>
+        <PestanasModo modo={modo} sesiones={sesiones} alCambiarModo={cambiarModo} />
 
-        {/* Temporizador */}
-        <p className="tiempo">{formatearTiempo(segundosRestantes)}</p>
+        <Temporizador segundos={segundosRestantes} />
 
-        {/* Botones de control */}
-        <div className="controles">
-          <button className="boton boton-principal" onClick={alternarPlayPausa}>
-            {enMarcha ? "Pausa" : "Play"}
-          </button>
-          <button className="boton boton-secundario" onClick={detener}>
-            Detener
-          </button>
-        </div>
+        <Controles
+          enMarcha={enMarcha}
+          alPulsarPlayPausa={alternarPlayPausa}
+          alDetener={detener}
+        />
 
-        {/* Presets predefinidos */}
-        <div className="presets">
-          <button
-            className={`preset ${preset === "corto" ? "activo" : ""}`}
-            onClick={() => cambiarPreset("corto")}
-          >
-            <strong>Corto</strong>
-            <span>25 min foco · 5 min descanso</span>
-          </button>
-          <button
-            className={`preset ${preset === "largo" ? "activo" : ""}`}
-            onClick={() => cambiarPreset("largo")}
-          >
-            <strong>Largo</strong>
-            <span>50 min foco · 10 min descanso</span>
-          </button>
-        </div>
+        <SelectorPreset preset={preset} alCambiarPreset={cambiarPreset} />
       </div>
     </main>
   );
