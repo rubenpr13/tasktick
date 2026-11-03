@@ -72,6 +72,11 @@ Registro de lo que se ha hecho en TaskTick (antes Study App) y de las decisiones
 - Notas del vault renombradas a `TaskTick`, `TaskTick - Registro` y `TaskTick - Aprendizajes técnicos`, con sus enlaces actualizados.
 - Rubén renombrará la carpeta local `proyectos/study-app` a `proyectos/tasktick` al cerrar la sesión; la memoria de Claude Code se dejó copiada en la ruta nueva.
 
+### 2026-11-03: Skill de diseño design-taste-frontend
+- A petición de Rubén se instala la skill `design-taste-frontend` (repositorio `Leonxlnx/taste-skill`) solo en este proyecto, en `.claude/skills/design-taste-frontend/`. El instalador crea también `skills-lock.json` con su origen y su hash.
+- El instalador la marcó como "Critical Risk" (Gen) y "Med Risk" (Snyk). Revisé el código: sus scripts abren Chrome para hacer capturas y descargan imágenes de webs públicas (Openverse, Wikimedia, museos, NASA), sin claves ni nada sospechoso. Al usarse escribe en `.taste-skill/` del proyecto y en `~/.taste-skill/history.json`.
+- No cambia nada de la app. El diseño "cuaderno + subrayador" sigue siendo el aprobado.
+
 ## Decisiones pendientes de revisar
 Las tomé yo porque el encargo no las especificaba:
 - [x] Al terminar el descanso largo se vuelve a Concentración. Confirmado por Rubén el 2026-11-03.
