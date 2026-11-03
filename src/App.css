@@ -581,7 +581,19 @@ input:focus-visible {
   }
 
   .pestanas {
-    column-gap: 8px;
+    column-gap: 4px;
+  }
+}
+
+/* ----- Pantallas estrechas de 421 a 519 px (móviles grandes, ventanas estrechas): pestañas como en el móvil ----- */
+@media (min-width: 421px) and (max-width: 519px) {
+  .pestana {
+    padding: 0 3px;
+    font-size: 13px;
+  }
+
+  .pestanas {
+    column-gap: 4px;
   }
 }
 
@@ -601,7 +613,11 @@ input:focus-visible {
     font-size: 13px;
   }
 
-  .pestanas,
+  /* Pestañas un poco más juntas para que quepan también en móviles de 360 px */
+  .pestanas {
+    column-gap: 4px;
+  }
+
   .presets {
     column-gap: 8px;
   }
