@@ -607,9 +607,9 @@ input:focus-visible {
     row-gap: calc(var(--cuadro) * 2);
   }
 
-  /* Letra un poco más pequeña para que las tres pestañas quepan en una fila (desde 375 px de ancho) */
+  /* Letra un poco más pequeña y menos margen para que las tres pestañas quepan en una fila (desde 360 px) */
   .pestana {
-    padding: 0 3px;
+    padding: 0 2px;
     font-size: 13px;
   }
 
