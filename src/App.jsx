@@ -42,7 +42,7 @@ export default function App() {
     <main className={`app modo-${modo}`}>
       <div className="hoja">
         <section className="columna columna-reloj">
-          <h1 className="titulo">Study App</h1>
+          <h1 className="titulo">Temporizador</h1>
 
           <PestanasModo modo={modo} sesiones={sesiones} onCambiarModo={cambiarModo} />
 

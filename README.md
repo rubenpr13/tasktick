@@ -15,7 +15,7 @@ Web para estudiar con la **técnica Pomodoro**: alterna bloques de concentració
 - **Descanso largo** de 30 minutos (en Corto y Largo), que solo se activa a mano desde su pestaña.
 - **Controles**: Play / Pausa, Detener (vuelve al inicio del modo actual) y ⚙ para personalizar los tiempos.
 - **Tiempos personalizados**: el botón ⚙ abre una ventana para elegir los minutos de concentración, descanso corto y descanso largo (de 1 a 120). Al guardar aparece el preset **Personalizado** con esos tiempos. No se guardan al recargar la página.
-- **Lista de tareas** en una columna junto al reloj (debajo en el móvil): añade tareas con + o Enter, márcalas como hechas, edítalas con doble clic (Enter o pulsar fuera guarda, Escape cancela) y bórralas con ×. Las tareas no se guardan al recargar la página.
+- **Lista de tareas** ("To Do List") en una columna junto al reloj (debajo en el móvil): añade tareas con + o Enter, márcalas como hechas, edítalas con doble clic (Enter o pulsar fuera guarda, Escape cancela) y bórralas con ×. Las tareas no se guardan al recargar la página.
 
 ## Diseño
 

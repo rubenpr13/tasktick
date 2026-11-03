@@ -61,6 +61,10 @@ Registro de lo que se ha hecho en Study App y de las decisiones tomadas. Las reg
 - Código: `Temporizador` recibe `modo` y pinta los números en un `<span key={modo}>` para repetir la animación; `App` monta una `.hoja` con dos `.columna` (`columna-reloj`, `columna-tareas`) en lugar de `.tarjeta`; `SelectorPreset` ya no usa `<strong>`; espacio entre el nombre de la pestaña y su contador.
 - Probado en Chrome: ordenador, móvil de 375 px (sin scroll horizontal, pestañas en una fila), ventana de Personalizar y cambio de modo. Las fuentes cargan bien.
 
+### 2026-11-03: Nuevos títulos de las columnas
+- A petición de Rubén, la columna del reloj se titula "Temporizador" (antes "Study App") y la de las tareas "To Do List" (antes "Tareas"). Es la única excepción a los textos en español.
+- El título de la pestaña del navegador (`<title>` en `index.html`) sigue siendo "Study App".
+
 ## Decisiones pendientes de revisar
 Las tomé yo porque el encargo no las especificaba:
 - [x] Al terminar el descanso largo se vuelve a Concentración. Confirmado por Rubén el 2026-11-03.

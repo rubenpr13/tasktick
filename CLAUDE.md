@@ -25,6 +25,7 @@ No hay tests ni linter configurados.
 - `.mcp.json`: servidores MCP de Claude Code (ahora `chrome-devtools`, para abrir y probar la app en Chrome). Es personal: está en `.gitignore` y no se sube (decidido por Rubén el 2026-11-03)
 
 ## Reglas del temporizador (no cambiarlas sin pedirlo)
+- La columna del reloj se titula "Temporizador" (cambiado por Rubén el 2026-11-03; antes "Study App"). La pestaña del navegador sigue diciendo "Study App".
 - Cuenta atrás hasta `00:00`. Al abrir o recargar la web se muestra Concentración con 25:00 en pausa; solo empieza al pulsar Play (cambiado por Rubén el 2026-10-29).
 - Presets: Corto = 25 min de foco / 5 min de descanso; Largo = 50 / 10. En Corto y Largo el Descanso largo dura siempre 30 min. El Descanso largo solo se activa a mano.
 - Personalizar (decidido por Rubén el 2026-11-03): el botón ⚙ junto a Play/Detener abre una ventana centrada con Concentración, Descanso corto y Descanso largo (campo de texto que solo admite dígitos, sin flechas, con botones − y +; de 1 a 120 min). Se abre con los últimos tiempos guardados (al principio 25 / 5 / 30). Solo se aplica al pulsar Guardar, y no deja guardar si un valor no es válido. Se cierra sin guardar con Cancelar, pulsando fuera o con Escape.
@@ -37,7 +38,7 @@ No hay tests ni linter configurados.
 - Los contadores y los tiempos personalizados viven en memoria y no se guardan (confirmado por Rubén el 2026-11-03).
 
 ## Reglas de la lista de tareas (decididas por Rubén el 2026-11-03; no cambiarlas sin pedirlo)
-- Va en una columna aparte, "Tareas": en el ordenador a la derecha del reloj, con el mismo ancho y separada por la línea de margen; en pantallas estrechas, debajo.
+- Va en una columna aparte, con el título "To Do List": en el ordenador a la derecha del reloj, con el mismo ancho y separada por la línea de margen; en pantallas estrechas, debajo.
 - Añadir: campo "Nueva tarea…" y botón + (o Enter). Se quitan los espacios de los extremos, no se añaden tareas vacías y el máximo es 100 caracteres. La tarea nueva va al final.
 - Marcar como hecha con una casilla: la tarea se queda en su sitio, tachada y más clara.
 - Editar con doble clic en el texto: Enter o pulsar fuera guardan, Escape cancela. Si el texto queda vacío, vuelve el anterior.
@@ -71,7 +72,7 @@ Vault: `C:\Users\ruben\iCloudDrive\iCloud~md~obsidian\Rpinazo`. Antes de escribi
 
 ## Estilo de trabajo
 - El usuario está empezando a programar: código simple y claro, nombres y comentarios en español, sin abstracciones innecesarias.
-- Todos los textos de la interfaz, en español.
+- Todos los textos de la interfaz, en español. Excepción: el título "To Do List" de la lista de tareas (pedido por Rubén el 2026-11-03).
 - No añadir funcionalidades que no se hayan pedido (sonidos, notificaciones, localStorage, ajustes, librerías nuevas…).
 - Diseño limpio y moderno; tiene que verse bien en el móvil.
 - **No tomar decisiones propias (pedido por Rubén el 2026-11-03):** preguntar siempre antes, en todo (estructura, nombres, textos, alcance del cambio…), con opciones y una recomendación. Cualquier duda o cosa que no esté clara también se pregunta.

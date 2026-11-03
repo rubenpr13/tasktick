@@ -24,7 +24,7 @@ export default function ListaTareas({ tareas, onAnadir, onAlternarHecha, onEdita
 
   return (
     <section className="columna columna-tareas">
-      <h2 className="titulo">Tareas</h2>
+      <h2 className="titulo">To Do List</h2>
 
       <form className="tareas-formulario" onSubmit={anadir}>
         <input
