@@ -29,11 +29,11 @@ No hay tests ni linter configurados.
 - Personalizar (decidido por Rubén el 2026-11-03): el botón ⚙ junto a Play/Detener abre una ventana centrada con Concentración, Descanso corto y Descanso largo (campo de texto que solo admite dígitos, sin flechas, con botones − y +; de 1 a 120 min). Se abre con los últimos tiempos guardados (al principio 25 / 5 / 30). Solo se aplica al pulsar Guardar, y no deja guardar si un valor no es válido. Se cierra sin guardar con Cancelar, pulsando fuera o con Escape.
 - Los botones de preset solo muestran el nombre (Corto, Largo, Personalizado), sin subtítulo; en el móvil los tres van en una fila.
 - Al guardar aparece y se activa un tercer preset "Personalizado" con esos tiempos (incluido el Descanso largo, que solo cambia en este preset); el modo actual se reinicia con su nueva duración y queda en pausa.
-- Al llegar a 00:00 se pasa de Concentración a Descanso corto, y de cualquier descanso a Concentración. El nuevo modo queda en pausa hasta pulsar Play (cambiado por Rubén el 2026-10-29).
+- Al llegar a 00:00 se pasa de Concentración a Descanso corto, y de cualquier descanso (también el largo) a Concentración. El nuevo modo queda en pausa hasta pulsar Play (cambiado por Rubén el 2026-10-29).
 - Una sesión solo se suma cuando el temporizador termina, nunca al pausar, detener o cambiar de modo.
-- Cambiar de pestaña o de preset reinicia el tiempo y lo deja en pausa. Detener pausa y vuelve al inicio del modo actual.
+- Cambiar de pestaña o de preset reinicia el tiempo y lo deja en pausa. Detener pausa y vuelve al inicio del modo actual, sin sumar sesión (confirmado por Rubén el 2026-11-03).
 - El tiempo se calcula con la hora local del usuario (`Date.now()` y una hora de fin), nunca UTC ni hora del servidor. Así no se desfasa aunque la pestaña esté en segundo plano.
-- Los contadores y los tiempos personalizados viven en memoria y no se guardan.
+- Los contadores y los tiempos personalizados viven en memoria y no se guardan (confirmado por Rubén el 2026-11-03).
 
 ## Reglas de la lista de tareas (decididas por Rubén el 2026-11-03; no cambiarlas sin pedirlo)
 - Va en una tarjeta aparte, "Tareas": en el ordenador a la derecha del reloj y con el mismo ancho; en pantallas estrechas, debajo.

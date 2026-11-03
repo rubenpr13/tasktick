@@ -43,13 +43,17 @@ Registro de lo que se ha hecho en Study App y de las decisiones tomadas. Las reg
 - Las tareas solo viven en memoria, como los contadores.
 - `.app` ahora coloca las tarjetas con `flex-wrap`: cada tarjeta mide entre 360 y 480 px y, si no caben dos, la segunda baja.
 
+### 2026-11-03: Revisión de decisiones pendientes
+- Rubén revisa las cuatro decisiones que quedaban y las confirma tal como están: al terminar el descanso largo se vuelve a Concentración; cambiar de pestaña o de preset reinicia y deja en pausa; Detener pausa y vuelve al inicio del modo sin sumar sesión; los contadores no se guardan al recargar.
+- El código no cambia; solo se actualizan `CLAUDE.md` y `MEMORY.md`.
+
 ## Decisiones pendientes de revisar
 Las tomé yo porque el encargo no las especificaba:
-- [ ] Al terminar el descanso largo se vuelve a Concentración.
+- [x] Al terminar el descanso largo se vuelve a Concentración. Confirmado por Rubén el 2026-11-03.
 - [x] ~~Tras un cambio automático de modo, el siguiente temporizador arranca solo.~~ Cambiado el 2026-10-29: ahora queda en pausa hasta pulsar Play.
-- [ ] Cambiar de pestaña o de preset reinicia el tiempo y lo deja en pausa.
-- [ ] Detener pausa y vuelve al inicio del modo actual, sin sumar sesión.
-- [ ] Los contadores no se guardan al recargar la página.
+- [x] Cambiar de pestaña o de preset reinicia el tiempo y lo deja en pausa. Confirmado por Rubén el 2026-11-03.
+- [x] Detener pausa y vuelve al inicio del modo actual, sin sumar sesión. Confirmado por Rubén el 2026-11-03.
+- [x] Los contadores no se guardan al recargar la página. Confirmado por Rubén el 2026-11-03.
 - [x] ~~Componentes: el estado sigue en `App`, los estilos en `App.css` y las props en español (`alCambiarModo`…).~~ Revisado el 2026-11-03: lógica en el hook `usePomodoro`, estilos en `App.css` y props `onX`.
 
 Cuando revises una, márcala con `[x]` o pide el cambio, y actualizaré también `CLAUDE.md`.
