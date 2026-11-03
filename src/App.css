@@ -30,6 +30,7 @@
   --boli-rojo: #d64545; /* tachado de tareas y × */
   --margen: #e7a3a3; /* línea de margen del cuaderno */
   --cuadro: 20px; /* tamaño de un cuadro de la hoja */
+  --ancho-hoja: 1080px; /* 54 cuadros: lo justo para que quepa el mapa de un año entero */
   --subrayador: #ffe14d; /* cambia según el modo (ver más abajo) */
   --subrayador-foco: #ffe14d; /* el amarillo de Concentración, fijo: lo usa el mapa de calor */
 
@@ -88,7 +89,7 @@ input:focus-visible {
 
 /* En el móvil, una columna: el reloj arriba y las tareas debajo */
 .hoja {
-  max-width: 1000px;
+  max-width: var(--ancho-hoja);
   margin: 0 auto;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -97,7 +98,7 @@ input:focus-visible {
 
 /* ----- Cabecera: nombre de la app sobre una línea de margen roja, como la cabecera de un cuaderno ----- */
 .cabecera {
-  max-width: 1000px; /* el mismo ancho que la hoja */
+  max-width: var(--ancho-hoja);
   margin: 0 auto calc(var(--cuadro) * 2 - 2px); /* - 2px de la línea, para que la hoja siga encajando en los cuadros */
   border-bottom: 2px solid var(--margen);
 }
@@ -423,7 +424,7 @@ input:focus-visible {
 
 /* ----- Constancia: racha y mapa de calor, debajo y a todo el ancho de la hoja ----- */
 .constancia {
-  max-width: 1000px; /* el mismo ancho que la hoja */
+  max-width: var(--ancho-hoja);
   margin: calc(var(--cuadro) * 3) auto 0;
   padding-top: calc(var(--cuadro) * 2 - 2px); /* - 2px de la línea, para seguir encajando en los cuadros */
   border-top: 2px solid var(--margen);
@@ -453,23 +454,18 @@ input:focus-visible {
   color: var(--tinta);
 }
 
-/* Si el año no cabe a lo ancho, el mapa se desplaza de lado dentro de su marco */
-.mapa-marco {
-  overflow-x: auto;
-}
-
 .mapa-marco:focus-visible {
   outline: 2px solid var(--tinta);
   outline-offset: 2px;
 }
 
-/* Cada día es un cuadro de la hoja: una columna por semana y una fila por día (de lunes a domingo).
-   La primera fila es para los meses y la primera columna para las letras de los días */
+/* El año entero siempre cabe a lo ancho: una columna por semana y una fila por día (de lunes a domingo).
+   La primera fila es para los meses y la primera columna (un cuadro) para las letras de los días.
+   Las 53 semanas se reparten el resto del ancho: con la hoja entera (1080 px) cada día es un cuadro
+   de 20 px; en pantallas más estrechas los cuadros se encogen */
 .mapa {
   display: grid;
-  grid-template-columns: repeat(54, var(--cuadro));
-  grid-template-rows: repeat(8, var(--cuadro));
-  width: max-content;
+  grid-template-columns: var(--cuadro) repeat(53, minmax(0, 1fr));
 }
 
 .mapa-mes,
@@ -481,19 +477,21 @@ input:focus-visible {
 
 .mapa-mes {
   grid-row: 1;
+  line-height: var(--cuadro);
 }
 
 .mapa-dia-semana {
   grid-column: 1;
-  /* Las letras de los días se quedan fijas a la izquierda al desplazar el mapa */
-  position: sticky;
-  left: 0;
-  z-index: 1;
-  background: var(--papel);
+  /* Altura 0 y centrada: la letra no hace más alta su fila cuando los cuadros son pequeños (móvil) */
+  align-self: center;
+  display: flex;
+  align-items: center;
+  height: 0;
 }
 
-/* Un día: un cuadro un poco más pequeño que el de la hoja. Sin estudio, un gris muy suave */
+/* Un día: un cuadro un poco más pequeño que su hueco (siempre cuadrado). Sin estudio, un gris muy suave */
 .dia {
+  aspect-ratio: 1;
   margin: 2px;
   border-radius: 3px;
   background: rgba(30, 42, 58, 0.07);
@@ -545,10 +543,35 @@ input:focus-visible {
 }
 
 .leyenda .dia {
+  aspect-ratio: auto;
   width: 16px;
   height: 16px;
   margin: 0;
   cursor: default;
+}
+
+/* Con los cuadros pequeños (tablet y móvil), menos separación y bordes más finos para que se vean los colores */
+@media (max-width: 1159px) {
+  .dia {
+    margin: 1px;
+    border-radius: 2px;
+  }
+
+  .dia.hoy {
+    border-width: 1px;
+  }
+
+  .dia.elegido {
+    outline-width: 1px;
+  }
+}
+
+/* En el móvil los meses y las letras de los días van más pequeños para que no se pisen */
+@media (max-width: 519px) {
+  .mapa-mes,
+  .mapa-dia-semana {
+    font-size: 11px;
+  }
 }
 
 /* ----- Ordenador: reloj a la izquierda y tareas a la derecha, con la línea de margen en medio ----- */

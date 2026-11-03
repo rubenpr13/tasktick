@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { SEMANAS_MAPA } from "../config.js";
 import {
   calcularRachas,
@@ -32,12 +32,6 @@ export default function Constancia({ historial }) {
   const hoy = fechaDeHoy();
   // Día cuyo dato se muestra debajo del mapa (al principio, hoy)
   const [elegido, setElegido] = useState(hoy);
-  const marco = useRef(null);
-
-  // Al abrir, el mapa se desplaza hasta el final para que se vea la semana actual
-  useEffect(() => {
-    marco.current.scrollLeft = marco.current.scrollWidth;
-  }, []);
 
   const { actual, mejor } = calcularRachas(historial);
 
@@ -67,7 +61,6 @@ export default function Constancia({ historial }) {
     const nuevo = sumarDias(elegido, pasos[evento.key]);
     if (nuevo < inicio || nuevo > hoy) return; // no se sale del mapa ni pasa de hoy
     setElegido(nuevo);
-    marco.current.querySelector(`[data-fecha="${nuevo}"]`).scrollIntoView({ block: "nearest", inline: "nearest" });
   }
 
   return (
@@ -80,9 +73,8 @@ export default function Constancia({ historial }) {
         </p>
       </div>
 
-      {/* El marco se desplaza de lado si el año no cabe. Se puede enfocar y recorrer con las flechas */}
+      {/* El mapa se puede enfocar con el teclado y recorrer con las flechas */}
       <div
-        ref={marco}
         className="mapa-marco"
         tabIndex={0}
         role="group"
@@ -91,7 +83,16 @@ export default function Constancia({ historial }) {
       >
         <div className="mapa" aria-hidden="true">
           {meses.map((mes) => (
-            <span key={`${mes.semana}-${mes.nombre}`} className="mapa-mes" style={{ gridColumn: mes.semana + 2 }}>
+            <span
+              key={`${mes.semana}-${mes.nombre}`}
+              className="mapa-mes"
+              // Un mes que empieza en las 2 últimas semanas se alinea al final del mapa, para no salirse por la derecha
+              style={
+                mes.semana >= SEMANAS_MAPA - 2
+                  ? { gridColumn: `${mes.semana + 2} / -1`, justifySelf: "end" }
+                  : { gridColumn: mes.semana + 2 }
+              }
+            >
               {mes.nombre}
             </span>
           ))}
@@ -105,7 +106,6 @@ export default function Constancia({ historial }) {
           {cuadros.map((cuadro) => (
             <span
               key={cuadro.fecha}
-              data-fecha={cuadro.fecha}
               className={[
                 "dia",
                 `nivel-${cuadro.nivel}`,
