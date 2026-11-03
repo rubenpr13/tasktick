@@ -1,0 +1,110 @@
+<!doctype html>
+<!--
+  Tarjeta de vista previa de TaskTick: la imagen que sale al compartir el enlace (public/vista-previa.png).
+  No forma parte de la app ni se publica: solo sirve para volver a sacar la imagen si cambia algo.
+
+  Cómo sacar la imagen:
+  1. Abre este archivo con doble clic en Chrome.
+  2. Abre las herramientas de desarrollo (F12) y activa el modo de dispositivo (Ctrl + Mayús + M).
+  3. Pon el tamaño a 1200 × 630 y la escala al 100 %.
+  4. En el menú de los tres puntos del modo de dispositivo, elige "Capturar pantalla".
+  5. Guarda la imagen como public/vista-previa.png (sustituye a la anterior).
+-->
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<title>Tarjeta de vista previa · TaskTick</title>
+<style>
+  @font-face {
+    font-family: "Atkinson Hyperlegible Next";
+    font-weight: 400 700;
+    src: url("../public/fonts/atkinson-hyperlegible-next-latin.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Lexend";
+    font-weight: 800;
+    src: url("../public/fonts/lexend-latin.woff2") format("woff2");
+  }
+  :root {
+    --papel: #f7f9fb;
+    --cuadricula: #d6e0ea;
+    --tinta: #1e2a3a;
+    --tinta-suave: #5b6b7f;
+    --margen: #e7a3a3;
+    --subrayador: #ffe14d;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    background-color: var(--papel);
+    background-image:
+      linear-gradient(var(--cuadricula) 1px, transparent 1px),
+      linear-gradient(90deg, var(--cuadricula) 1px, transparent 1px);
+    background-size: 20px 20px;
+    color: var(--tinta);
+    font-family: "Atkinson Hyperlegible Next", sans-serif;
+    padding: 100px 80px;
+  }
+  /* Cabecera: casilla marcada + nombre sobre la línea de margen roja, como en la app */
+  .cabecera {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    height: 80px;
+    border-bottom: 3px solid var(--margen);
+  }
+  .casilla {
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--tinta);
+    border-radius: 6px;
+    background: var(--papel) center / 28px no-repeat
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M2 7.5l3.2 3.2L12 3.5' fill='none' stroke='%231e2a3a' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  }
+  .nombre {
+    font-family: "Lexend", sans-serif;
+    font-weight: 800;
+    font-size: 48px;
+    line-height: 1;
+  }
+  /* El reloj con el trazo de subrayador detrás */
+  .reloj {
+    margin-top: 57px;
+    font-family: "Lexend", sans-serif;
+    font-weight: 800;
+    font-size: 210px;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .reloj span {
+    position: relative;
+    isolation: isolate;
+    display: inline-block;
+    padding: 0 18px;
+  }
+  .reloj span::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 22% -6px 6% -3px;
+    background: var(--subrayador);
+    border-radius: 6px 15px 9px 18px;
+    transform: rotate(-1deg);
+  }
+  .frase {
+    margin-top: 40px;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1;
+  }
+</style>
+</head>
+<body>
+  <div class="cabecera">
+    <span class="casilla"></span>
+    <span class="nombre">TaskTick</span>
+  </div>
+  <p class="reloj"><span>25:00</span></p>
+  <p class="frase">Pomodoro y lista de tareas para estudiar</p>
+</body>
+</html>

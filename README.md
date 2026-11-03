@@ -66,7 +66,10 @@ tasktick/
 ├── index.html        # Página base donde se monta React
 ├── public/
 │   ├── favicon.svg   # Icono de la pestaña
+│   ├── vista-previa.png  # Imagen que sale al compartir el enlace
 │   └── fonts/        # Fuentes y sus licencias
+├── disenos/
+│   └── vista-previa.html # Página de la que sale vista-previa.png (no se publica; instrucciones dentro)
 ├── vite.config.js    # Configuración de Vite
 ├── package.json      # Dependencias y comandos
 └── src/
