@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { SEMANAS_MAPA } from "../config.js";
 import {
   calcularRachas,
   fechaDeHoy,
@@ -35,7 +34,8 @@ function conCifras(texto) {
   );
 }
 
-// Sección "Constancia": la racha de días seguidos estudiando y un mapa de calor del último año.
+// Sección "Constancia": la racha de días seguidos estudiando y un mapa de calor de un año natural
+// (del 1 de enero al 31 de diciembre), con flechas para ver otros años.
 // Cada cuadro es un día, más amarillo cuantos más minutos de concentración.
 // Al pasar el ratón, tocar un día o moverse con las flechas, su dato sale en una ventanita flotante.
 // Props:
@@ -48,17 +48,34 @@ export default function Constancia({ historial }) {
 
   const { actual, mejor } = calcularRachas(historial);
 
-  // El mapa empieza en el lunes de hace 52 semanas y acaba en la semana actual
-  const diaDeLaSemana = (leerFecha(hoy).getDay() + 6) % 7; // 0 = lunes, 6 = domingo
-  const inicio = sumarDias(hoy, -diaDeLaSemana - 7 * (SEMANAS_MAPA - 1));
+  // Año que se ve en el mapa. Se puede ir desde el primer año con datos hasta el actual
+  const anioActual = leerFecha(hoy).getFullYear();
+  const [anio, setAnio] = useState(anioActual);
+  const fechasGuardadas = Object.keys(historial).sort();
+  const primerAnio =
+    fechasGuardadas.length > 0 ? Math.min(Number(fechasGuardadas[0].slice(0, 4)), anioActual) : anioActual;
+
+  function cambiarAnio(nuevo) {
+    setSenalado(null);
+    setAnio(nuevo);
+  }
+
+  // El mapa va del 1 de enero al 31 de diciembre. Cada columna es una semana de lunes a domingo:
+  // la primera empieza el lunes de la semana del 1 de enero (puede ser de diciembre del año anterior)
+  const primerDia = `${anio}-01-01`;
+  const ultimoDia = `${anio}-12-31`;
+  const diaDeLaSemana = (leerFecha(primerDia).getDay() + 6) % 7; // 0 = lunes, 6 = domingo
+  const inicio = sumarDias(primerDia, -diaDeLaSemana);
+  let semanas = 0; // 53 casi siempre (54 algún año bisiesto)
+  while (sumarDias(inicio, semanas * 7) <= ultimoDia) semanas++;
 
   const cuadros = [];
   const meses = [];
-  for (let semana = 0; semana < SEMANAS_MAPA; semana++) {
+  for (let semana = 0; semana < semanas; semana++) {
     for (let fila = 0; fila < 7; fila++) {
       const fecha = sumarDias(inicio, semana * 7 + fila);
-      // Encima de la semana en la que empieza un mes, su nombre
-      if (leerFecha(fecha).getDate() === 1) {
+      // Encima de la semana en la que empieza un mes del año, su nombre
+      if (fecha >= primerDia && fecha <= ultimoDia && leerFecha(fecha).getDate() === 1) {
         meses.push({ semana, nombre: NOMBRES_MES[leerFecha(fecha).getMonth()] });
       }
       const nivel = nivelDeMinutos(historial[fecha]?.minutosFoco ?? 0);
@@ -66,9 +83,9 @@ export default function Constancia({ historial }) {
     }
   }
 
-  // Abre la ventanita encima del cuadro de un día (los días que aún no han llegado no tienen)
+  // Abre la ventanita encima del cuadro de un día del año (los días que aún no han llegado no tienen)
   function senalar(fecha) {
-    if (fecha < inicio || fecha > hoy) return;
+    if (fecha < primerDia || fecha > ultimoDia || fecha > hoy) return;
     const cuadro = mapa.current.querySelector(`[data-fecha="${fecha}"]`);
     setSenalado({ fecha, x: cuadro.offsetLeft, y: cuadro.offsetTop, ancho: cuadro.offsetWidth });
   }
@@ -83,12 +100,15 @@ export default function Constancia({ historial }) {
     return () => document.removeEventListener("pointerdown", cerrarSiFuera);
   }, [senalado]);
 
+  // Día que se señala al entrar con el teclado: hoy, o el 31 de diciembre si se ve un año pasado
+  const diaInicialTeclado = hoy <= ultimoDia ? hoy : ultimoDia;
+
   // Con el teclado: al entrar en el mapa se señala hoy, y las flechas mueven el día (izquierda/derecha = una semana)
   function moverConTeclado(evento) {
     const pasos = { ArrowLeft: -7, ArrowRight: 7, ArrowUp: -1, ArrowDown: 1 };
     if (!(evento.key in pasos)) return;
     evento.preventDefault();
-    senalar(sumarDias(senalado?.fecha ?? hoy, pasos[evento.key]));
+    senalar(sumarDias(senalado?.fecha ?? diaInicialTeclado, pasos[evento.key]));
   }
 
   // La ventanita va centrada sobre el día; cerca de los bordes del mapa se apoya en un lado para no salirse
@@ -100,9 +120,33 @@ export default function Constancia({ historial }) {
   }
 
   return (
-    <section className="constancia">
+    // --semanas: número de columnas del mapa (lo usan los estilos del mapa y de la leyenda)
+    <section className="constancia" style={{ "--semanas": semanas }}>
       <div className="constancia-cabecera">
         <h2 className="titulo">Constancia</h2>
+        <div className="selector-anio">
+          <button
+            type="button"
+            className="selector-anio-flecha"
+            aria-label="Año anterior"
+            disabled={anio <= primerAnio}
+            onClick={() => cambiarAnio(anio - 1)}
+          >
+            ‹
+          </button>
+          <span className="selector-anio-numero" aria-live="polite">
+            {anio}
+          </span>
+          <button
+            type="button"
+            className="selector-anio-flecha"
+            aria-label="Año siguiente"
+            disabled={anio >= anioActual}
+            onClick={() => cambiarAnio(anio + 1)}
+          >
+            ›
+          </button>
+        </div>
         <p className="racha">
           Racha: <strong>{actual}</strong> {actual === 1 ? "día" : "días"} · Mejor: <strong>{mejor}</strong>{" "}
           {mejor === 1 ? "día" : "días"}
@@ -114,9 +158,9 @@ export default function Constancia({ historial }) {
         className="mapa-marco"
         tabIndex={0}
         role="group"
-        aria-label="Mapa de constancia del último año. Usa las flechas para cambiar de día."
+        aria-label={`Mapa de constancia de ${anio}. Usa las flechas para cambiar de día.`}
         onKeyDown={moverConTeclado}
-        onFocus={() => senalar(hoy)}
+        onFocus={() => senalar(diaInicialTeclado)}
         onBlur={() => setSenalado(null)}
       >
         <div ref={mapa} className="mapa" aria-hidden="true" onMouseLeave={() => setSenalado(null)}>
@@ -126,7 +170,7 @@ export default function Constancia({ historial }) {
               className="mapa-mes"
               // Un mes que empieza en las 2 últimas semanas se alinea al final del mapa, para no salirse por la derecha
               style={
-                mes.semana >= SEMANAS_MAPA - 2
+                mes.semana >= semanas - 2
                   ? { gridColumn: `${mes.semana + 1} / -1`, justifySelf: "end" }
                   : { gridColumn: mes.semana + 1 }
               }
@@ -145,6 +189,7 @@ export default function Constancia({ historial }) {
                 cuadro.fecha === hoy ? "hoy" : "",
                 cuadro.fecha === senalado?.fecha ? "senalado" : "",
                 cuadro.fecha > hoy ? "futuro" : "",
+                cuadro.fecha < primerDia || cuadro.fecha > ultimoDia ? "fuera" : "",
               ].join(" ")}
               style={{ gridColumn: cuadro.semana + 1, gridRow: cuadro.fila + 2 }}
               onMouseEnter={() => senalar(cuadro.fecha)}

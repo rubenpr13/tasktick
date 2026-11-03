@@ -38,9 +38,6 @@ export const CLAVES_GUARDADO = {
 
 // ----- Configuración de la constancia (racha y mapa de calor) -----
 
-// Semanas que muestra el mapa de calor (un año, como GitHub)
-export const SEMANAS_MAPA = 53;
-
 // Minutos de concentración al día que separan los tonos del mapa:
 // menos de 1 h, de 1 a 2 h, de 2 a 3 h y 3 h o más
 export const TRAMOS_MINUTOS = [60, 120, 180];

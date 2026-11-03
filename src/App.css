@@ -451,6 +451,39 @@ input:focus-visible {
   margin: 0;
 }
 
+/* Selector de año: "‹ 2026 ›" junto al título */
+.selector-anio {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.selector-anio-flecha {
+  width: var(--cuadro);
+  height: var(--cuadro);
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--tinta-suave);
+  font-size: 20px;
+  line-height: 1;
+}
+
+.selector-anio-flecha:hover {
+  color: var(--tinta);
+}
+
+.selector-anio-flecha:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+/* El año en Lexend, como los demás números (en Atkinson el 0 sale tachado) */
+.selector-anio-numero {
+  font-family: var(--fuente-reloj);
+  font-variant-numeric: tabular-nums;
+}
+
 .racha {
   margin: 0;
   color: var(--tinta-suave);
@@ -473,7 +506,7 @@ input:focus-visible {
 .mapa {
   position: relative; /* la ventanita flotante se coloca respecto al mapa */
   display: grid;
-  grid-template-columns: repeat(53, minmax(0, 1fr));
+  grid-template-columns: repeat(var(--semanas), minmax(0, 1fr));
 }
 
 .mapa-mes {
@@ -510,8 +543,14 @@ input:focus-visible {
   outline-offset: 1px;
 }
 
-/* Los días que aún no han llegado (en la semana actual) no se ven */
+/* Los días del año que aún no han llegado: más tenues y sin ventanita */
 .dia.futuro {
+  background: rgba(30, 42, 58, 0.03);
+  cursor: default;
+}
+
+/* Los días de la primera y la última semana que son de otro año no se ven */
+.dia.fuera {
   visibility: hidden;
 }
 
@@ -599,8 +638,8 @@ input:focus-visible {
 
 .leyenda .dia {
   aspect-ratio: auto;
-  width: calc(100cqw / 53 - 4px);
-  height: calc(100cqw / 53 - 4px);
+  width: calc(100cqw / var(--semanas) - 4px);
+  height: calc(100cqw / var(--semanas) - 4px);
   margin: 0;
   cursor: default;
 }
@@ -625,8 +664,8 @@ input:focus-visible {
   }
 
   .leyenda .dia {
-    width: calc(100cqw / 53 - 2px);
-    height: calc(100cqw / 53 - 2px);
+    width: calc(100cqw / var(--semanas) - 2px);
+    height: calc(100cqw / var(--semanas) - 2px);
   }
 }
 
