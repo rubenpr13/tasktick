@@ -225,7 +225,7 @@ input:focus-visible {
 
 .preset {
   height: calc(var(--cuadro) * 2);
-  padding: 0 6px;
+  padding: 0 6px 0 0; /* sin hueco a la izquierda: el texto empieza en el borde de la columna */
   border: none;
   background: transparent;
   color: var(--tinta-suave);

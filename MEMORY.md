@@ -86,6 +86,7 @@ Registro de lo que se ha hecho en TaskTick (antes Study App) y de las decisiones
 - Revisión con el inspector de la skill (con Node 20 funciona usando `node --experimental-websocket`; pide Node 22). Rubén aprobó tres arreglos pequeños, sin cambiar el diseño:
 - Contadores de sesiones en Lexend: con Atkinson el 0 salía tachado (Ø), igual que pasaba en el reloj.
 - Botón de personalizar: el carácter ⚙ cambiado por un engranaje dibujado en SVG (en tinta, 20 px), porque en muchos móviles salía como emoji de colores.
+- Presets (Corto, Largo, Personalizado) sin hueco a la izquierda, para que empiecen en el mismo borde que el título, el reloj y Play.
 
 ## Decisiones pendientes de revisar
 Las tomé yo porque el encargo no las especificaba:
