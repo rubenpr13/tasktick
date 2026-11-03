@@ -75,6 +75,35 @@ input:focus-visible {
   row-gap: calc(var(--cuadro) * 3);
 }
 
+/* ----- Cabecera: nombre de la app sobre una línea de margen roja, como la cabecera de un cuaderno ----- */
+.cabecera {
+  max-width: 1000px; /* el mismo ancho que la hoja */
+  margin: 0 auto calc(var(--cuadro) * 2 - 2px); /* - 2px de la línea, para que la hoja siga encajando en los cuadros */
+  border-bottom: 2px solid var(--margen);
+}
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  font-family: var(--fuente-reloj);
+  font-size: 24px;
+  line-height: calc(var(--cuadro) * 2);
+  font-weight: 800;
+}
+
+/* La misma casilla marcada que las tareas hechas */
+.marca-casilla {
+  flex: none;
+  width: var(--cuadro);
+  height: var(--cuadro);
+  border: 2px solid var(--tinta);
+  border-radius: 3px;
+  background: var(--papel) center / 14px no-repeat
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M2 7.5l3.2 3.2L12 3.5' fill='none' stroke='%231e2a3a' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
 .titulo {
   margin: 0 0 var(--cuadro);
   font-size: 20px;

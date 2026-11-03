@@ -40,9 +40,17 @@ export default function App() {
 
   return (
     <main className={`app modo-${modo}`}>
+      {/* Cabecera con el nombre de la app: la casilla marcada (el "tick") y "TaskTick" */}
+      <header className="cabecera">
+        <h1 className="marca">
+          <span className="marca-casilla" aria-hidden="true"></span>
+          TaskTick
+        </h1>
+      </header>
+
       <div className="hoja">
         <section className="columna columna-reloj">
-          <h1 className="titulo">Temporizador</h1>
+          <h2 className="titulo">Temporizador</h2>
 
           <PestanasModo modo={modo} sesiones={sesiones} onCambiarModo={cambiarModo} />
 

@@ -88,6 +88,11 @@ Registro de lo que se ha hecho en TaskTick (antes Study App) y de las decisiones
 - Botón de personalizar: el carácter ⚙ cambiado por un engranaje dibujado en SVG (en tinta, 20 px), porque en muchos móviles salía como emoji de colores.
 - Presets (Corto, Largo, Personalizado) sin hueco a la izquierda, para que empiecen en el mismo borde que el título, el reloj y Play.
 
+### 2026-11-03: Cabecera con el nombre TaskTick
+- A petición de Rubén, encima de las dos columnas va una cabecera: la casilla marcada de las tareas (el "tick") y "TaskTick" en Lexend 800 a 24 px, sobre una línea de margen roja tan ancha como la hoja. Rubén eligió esta opción, que fuera el `h1` y que solo lleve el nombre.
+- "Temporizador" pasa de `h1` a `h2`, como "To Do List". Por fuera se ven igual.
+- Actualizado `CLAUDE.md`: el nombre ya no sale solo en la pestaña del navegador.
+
 ## Decisiones pendientes de revisar
 Las tomé yo porque el encargo no las especificaba:
 - [x] Al terminar el descanso largo se vuelve a Concentración. Confirmado por Rubén el 2026-11-03.

@@ -1,6 +1,6 @@
 # TaskTick
 
-Nombre de la app desde el 2026-11-03 (antes "Study App"; elegido por Rubén). Se ve en la pestaña del navegador, no dentro de la página.
+Nombre de la app desde el 2026-11-03 (antes "Study App"; elegido por Rubén). Se ve en la pestaña del navegador y en la cabecera de la página (cabecera pedida por Rubén el 2026-11-03).
 
 Web para estudiar con la técnica Pomodoro y una lista de tareas. Hecha con Vite + React 18, en JavaScript (sin TypeScript) y con CSS normal.
 
@@ -29,10 +29,10 @@ No hay tests ni linter configurados.
 - `.claude/skills/frontend-design/`: skill de diseño de Anthropic (de `anthropics/skills`, instalada por Rubén el 2026-11-03; también en `skills-lock.json`). Es la que se usó para planear el diseño "cuaderno + subrayador". Igual que la anterior, no autoriza a cambiar el diseño aprobado sin preguntar
 
 ## Reglas del temporizador (no cambiarlas sin pedirlo)
-- La columna del reloj se titula "Temporizador" (cambiado por Rubén el 2026-11-03; antes "Study App"). El nombre de la app, "TaskTick", solo sale en la pestaña del navegador.
+- La columna del reloj se titula "Temporizador" (cambiado por Rubén el 2026-11-03; antes "Study App"). Encima de las dos columnas va la cabecera con el nombre de la app, "TaskTick" (el único `h1`; "Temporizador" y "To Do List" son `h2`). Solo lleva el nombre, sin frase (decidido por Rubén el 2026-11-03).
 - Cuenta atrás hasta `00:00`. Al abrir o recargar la web se muestra Concentración con 25:00 en pausa; solo empieza al pulsar Play (cambiado por Rubén el 2026-10-29).
 - Presets: Corto = 25 min de foco / 5 min de descanso; Largo = 50 / 10. En Corto y Largo el Descanso largo dura siempre 30 min. El Descanso largo solo se activa a mano.
-- Personalizar (decidido por Rubén el 2026-11-03): el botón ⚙ junto a Play/Detener abre una ventana centrada con Concentración, Descanso corto y Descanso largo (campo de texto que solo admite dígitos, sin flechas, con botones − y +; de 1 a 120 min). Se abre con los últimos tiempos guardados (al principio 25 / 5 / 30). Solo se aplica al pulsar Guardar, y no deja guardar si un valor no es válido. Se cierra sin guardar con Cancelar, pulsando fuera o con Escape.
+- Personalizar (decidido por Rubén el 2026-11-03): el botón del engranaje (dibujado en SVG, no el carácter ⚙) junto a Play/Detener abre una ventana centrada con Concentración, Descanso corto y Descanso largo (campo de texto que solo admite dígitos, sin flechas, con botones − y +; de 1 a 120 min). Se abre con los últimos tiempos guardados (al principio 25 / 5 / 30). Solo se aplica al pulsar Guardar, y no deja guardar si un valor no es válido. Se cierra sin guardar con Cancelar, pulsando fuera o con Escape.
 - Los botones de preset solo muestran el nombre (Corto, Largo, Personalizado), sin subtítulo; en el móvil los tres van en una fila.
 - Al guardar aparece y se activa un tercer preset "Personalizado" con esos tiempos (incluido el Descanso largo, que solo cambia en este preset); el modo actual se reinicia con su nueva duración y queda en pausa.
 - Al llegar a 00:00 se pasa de Concentración a Descanso corto, y de cualquier descanso (también el largo) a Concentración. El nuevo modo queda en pausa hasta pulsar Play (cambiado por Rubén el 2026-10-29).
@@ -53,10 +53,11 @@ No hay tests ni linter configurados.
 ## Diseño "cuaderno + subrayador" (aprobado por Rubén el 2026-11-03; no cambiarlo sin pedirlo)
 - La página es una hoja de cuaderno cuadriculado (cuadros de 20 px, `--cuadro`); todo va alineado a la izquierda y encaja en los cuadros. Sin tarjetas ni sombras.
 - Colores: papel `#F7F9FB`, cuadrícula `#D6E0EA`, tinta `#1E2A3A`, tinta suave `#5B6B7F`, boli rojo `#D64545` (tachado y ×), margen `#E7A3A3`. Subrayador por modo: Concentración `#FFE14D`, Descanso corto `#9BE7A0`, Descanso largo `#9CC9FF`; siempre detrás de texto oscuro, nunca como color de letra.
-- Fuentes de Google Fonts: Atkinson Hyperlegible Next para los textos y Lexend (800, cifras de ancho fijo) para el reloj y los campos de minutos. Atkinson tacha el cero y en el reloj grande no se leía bien (decidido por Rubén).
+- Fuentes de Google Fonts: Atkinson Hyperlegible Next para los textos y Lexend (800, cifras de ancho fijo) para el reloj, los campos de minutos, los contadores de sesiones y el nombre de la cabecera. Atkinson tacha el cero y en el reloj grande no se leía bien (decidido por Rubén).
 - Lo llamativo es solo el reloj, con el trazo de subrayador detrás. Única animación: el subrayador se pinta de izquierda a derecha al cambiar de modo (no se anima si el sistema pide reducir el movimiento).
+- Cabecera (2026-11-03): la casilla marcada de las tareas + "TaskTick" en Lexend 800 a 24 px y en tinta, sobre una línea de margen roja de 2 px tan ancha como la hoja. Sin subrayador: lo llamativo sigue siendo el reloj.
 - Pestañas y presets son palabras sueltas: la pestaña activa lleva el subrayador; el preset activo, un subrayado en tinta. Contador de sesiones: número pequeño en el mismo renglón. En el móvil (≤ 420 px) las pestañas van a 13 px para caber en una fila.
-- Botones con esquinas de 6 px: Play y + en bloque de tinta; Detener, ⚙ y Cancelar con borde de tinta. La ventana de Personalizar es una hoja cuadriculada con borde de tinta.
+- Botones con esquinas de 6 px: Play y + en bloque de tinta; Detener, el engranaje y Cancelar con borde de tinta. La ventana de Personalizar es una hoja cuadriculada con borde de tinta.
 - Tareas: casilla de un cuadro con ✓ en tinta; las hechas se tachan en boli rojo.
 
 ## Git y GitHub
