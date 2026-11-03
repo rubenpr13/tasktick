@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { obtenerDuracion } from "../utilidades.js";
+import { CLAVES_GUARDADO } from "../config.js";
+import { fechaDeHoy, guardar, leerGuardado, obtenerDuracion } from "../utilidades.js";
+
+// Sesiones de un día en el que aún no se ha terminado ninguna
+const SIN_SESIONES = { foco: 0, descansoCorto: 0, descansoLargo: 0 };
 
 // ----- Hook del temporizador Pomodoro -----
 // Un hook es una función que empieza por "use" y agrupa estado y efectos de React.
@@ -10,9 +14,25 @@ export default function usePomodoro() {
   const [modo, setModo] = useState("foco");
   const [segundosRestantes, setSegundosRestantes] = useState(obtenerDuracion("foco", "corto"));
   const [enMarcha, setEnMarcha] = useState(false); // false = espera a que el usuario pulse Iniciar
-  const [sesiones, setSesiones] = useState({ foco: 0, descansoCorto: 0, descansoLargo: 0 });
-  // Tiempos del preset Personalizado; null hasta que el usuario los guarde por primera vez
-  const [tiemposPersonalizados, setTiemposPersonalizados] = useState(null);
+  // Historial guardado en el navegador: sesiones terminadas de cada día, por fecha local
+  // ({ "2026-11-03": { foco: 3, descansoCorto: 2, descansoLargo: 0 }, ... })
+  const [historial, setHistorial] = useState(() => leerGuardado(CLAVES_GUARDADO.historial, {}));
+  // Los contadores de las pestañas muestran solo las sesiones de hoy (a medianoche vuelven a 0)
+  const sesiones = historial[fechaDeHoy()] ?? SIN_SESIONES;
+  // Tiempos del preset Personalizado; null hasta que el usuario los guarde por primera vez.
+  // Se guardan en el navegador: tras recargar, el preset Personalizado sigue disponible
+  const [tiemposPersonalizados, setTiemposPersonalizados] = useState(() =>
+    leerGuardado(CLAVES_GUARDADO.tiempos, null)
+  );
+
+  // Guardar en el navegador el historial y los tiempos personalizados cada vez que cambian
+  useEffect(() => {
+    guardar(CLAVES_GUARDADO.historial, historial);
+  }, [historial]);
+
+  useEffect(() => {
+    if (tiemposPersonalizados !== null) guardar(CLAVES_GUARDADO.tiempos, tiemposPersonalizados);
+  }, [tiemposPersonalizados]);
 
   // 1) Cuenta atrás: mientras esté en marcha, se actualiza cada segundo.
   // Guardamos la hora local de fin y calculamos lo que falta con Date.now().
@@ -36,8 +56,12 @@ export default function usePomodoro() {
   useEffect(() => {
     if (segundosRestantes > 0) return;
 
-    // Solo aquí se suma la sesión: cuando el temporizador ha terminado
-    setSesiones((anteriores) => ({ ...anteriores, [modo]: anteriores[modo] + 1 }));
+    // Solo aquí se suma la sesión: cuando el temporizador ha terminado. Se apunta en el día de hoy
+    setHistorial((anterior) => {
+      const hoy = fechaDeHoy();
+      const delDia = anterior[hoy] ?? SIN_SESIONES;
+      return { ...anterior, [hoy]: { ...delDia, [modo]: delDia[modo] + 1 } };
+    });
 
     // Concentración -> Descanso corto; cualquier descanso -> Concentración
     const siguienteModo = modo === "foco" ? "descansoCorto" : "foco";

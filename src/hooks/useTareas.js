@@ -1,14 +1,21 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { CLAVES_GUARDADO } from "../config.js";
+import { guardar, leerGuardado } from "../utilidades.js";
 
 // ----- Hook de la lista de tareas -----
 // Aquí vive toda la lógica de las tareas; los componentes solo usan lo que devuelve.
-// Las tareas están solo en memoria: al recargar la página se pierden.
+// Las tareas se guardan en el navegador, así no se pierden al recargar la página.
 
 export default function useTareas() {
-  // Cada tarea es un objeto { id, texto, hecha }
-  const [tareas, setTareas] = useState([]);
-  // Número que se da como id a la próxima tarea (para que cada una tenga uno distinto)
-  const siguienteId = useRef(1);
+  // Cada tarea es un objeto { id, texto, hecha }. Al abrir, se cargan las guardadas
+  const [tareas, setTareas] = useState(() => leerGuardado(CLAVES_GUARDADO.tareas, []));
+  // Número que se da como id a la próxima tarea: uno más que el mayor de las guardadas
+  const siguienteId = useRef(tareas.reduce((mayor, tarea) => Math.max(mayor, tarea.id), 0) + 1);
+
+  // Cada vez que cambia la lista, se guarda en el navegador
+  useEffect(() => {
+    guardar(CLAVES_GUARDADO.tareas, tareas);
+  }, [tareas]);
 
   // Añade una tarea al final de la lista (el texto ya llega sin espacios en los extremos)
   function anadirTarea(texto) {

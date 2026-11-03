@@ -27,6 +27,15 @@ export const NOMBRES_MODO = {
   descansoLargo: "Descanso largo",
 };
 
+// ----- Datos guardados en el navegador -----
+
+// Nombres con los que se guarda cada dato en el localStorage del navegador
+export const CLAVES_GUARDADO = {
+  tareas: "tasktick-tareas",
+  tiempos: "tasktick-tiempos-personalizados",
+  historial: "tasktick-historial", // sesiones terminadas de cada día: { "2026-11-03": { foco: 3, ... } }
+};
+
 // ----- Configuración de la lista de tareas -----
 
 // Número máximo de caracteres que puede tener el texto de una tarea
