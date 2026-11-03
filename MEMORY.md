@@ -96,6 +96,9 @@ Registro de lo que se ha hecho en TaskTick (antes Study App) y de las decisiones
 ### 2026-11-03: Icono de la pestaña
 - A petición de Rubén, la pestaña tiene icono: `public/favicon.svg`, la casilla marcada en tinta sobre papel (la misma marca que la cabecera). Se enlaza en `index.html`.
 
+### 2026-11-03: Tiempo en la pestaña del navegador
+- A petición de Rubén, mientras el reloj corre el título de la pestaña muestra lo que queda y el modo ("24:58 · Concentración"). En pausa (y al abrir la web) vuelve a "TaskTick". Está en un `useEffect` de `App.jsx`.
+
 ## Decisiones pendientes de revisar
 Las tomé yo porque el encargo no las especificaba:
 - [x] Al terminar el descanso largo se vuelve a Concentración. Confirmado por Rubén el 2026-11-03.

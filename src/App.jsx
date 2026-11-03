@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import usePomodoro from "./hooks/usePomodoro.js";
 import useTareas from "./hooks/useTareas.js";
-import { TIEMPOS_PERSONALIZADOS_INICIALES } from "./config.js";
+import { TIEMPOS_PERSONALIZADOS_INICIALES, NOMBRES_MODO } from "./config.js";
+import { formatearTiempo } from "./utilidades.js";
 import PestanasModo from "./components/PestanasModo.jsx";
 import Temporizador from "./components/Temporizador.jsx";
 import Controles from "./components/Controles.jsx";
@@ -29,6 +30,14 @@ export default function App() {
   } = usePomodoro();
 
   const { tareas, anadirTarea, alternarHecha, editarTarea, borrarTarea } = useTareas();
+
+  // Título de la pestaña del navegador: mientras el reloj corre muestra lo que queda
+  // (por ejemplo "24:13 · Concentración"); en pausa vuelve a "TaskTick"
+  useEffect(() => {
+    document.title = enMarcha
+      ? `${formatearTiempo(segundosRestantes)} · ${NOMBRES_MODO[modo]}`
+      : "TaskTick";
+  }, [enMarcha, segundosRestantes, modo]);
 
   // true mientras la ventana de personalizar está abierta
   const [ventanaAbierta, setVentanaAbierta] = useState(false);

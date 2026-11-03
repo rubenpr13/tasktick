@@ -40,6 +40,7 @@ No hay tests ni linter configurados.
 - Una sesión solo se suma cuando el temporizador termina, nunca al pausar, detener o cambiar de modo.
 - Cambiar de pestaña o de preset reinicia el tiempo y lo deja en pausa. Detener pausa y vuelve al inicio del modo actual, sin sumar sesión (confirmado por Rubén el 2026-11-03).
 - El tiempo se calcula con la hora local del usuario (`Date.now()` y una hora de fin), nunca UTC ni hora del servidor. Así no se desfasa aunque la pestaña esté en segundo plano.
+- Mientras el reloj corre, el título de la pestaña del navegador muestra el tiempo que queda y el modo ("24:58 · Concentración"); en pausa es "TaskTick" (pedido por Rubén el 2026-11-03).
 - Los contadores y los tiempos personalizados viven en memoria y no se guardan (confirmado por Rubén el 2026-11-03).
 
 ## Reglas de la lista de tareas (decididas por Rubén el 2026-11-03; no cambiarlas sin pedirlo)
