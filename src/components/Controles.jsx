@@ -1,4 +1,4 @@
-// Botones Play/Pausa, Detener y Personalizar (engranaje).
+// Botones Iniciar/Pausa, Detener y Personalizar (engranaje).
 // Props:
 // - enMarcha: true si el temporizador está contando
 // - onPlayPausa: función que pone en marcha o pausa el temporizador
@@ -8,7 +8,7 @@ export default function Controles({ enMarcha, onPlayPausa, onDetener, onPersonal
   return (
     <div className="controles">
       <button className="boton boton-principal" onClick={onPlayPausa}>
-        {enMarcha ? "Pausa" : "Play"}
+        {enMarcha ? "Pausa" : "Iniciar"}
       </button>
       <button className="boton boton-secundario" onClick={onDetener}>
         Detener

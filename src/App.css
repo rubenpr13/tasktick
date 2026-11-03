@@ -219,7 +219,7 @@ input:focus-visible {
   transform: translateY(1px);
 }
 
-/* Play: bloque de tinta */
+/* Iniciar/Pausa: bloque de tinta */
 .boton-principal {
   min-width: 120px;
   background: var(--tinta);

@@ -9,7 +9,7 @@ export default function usePomodoro() {
   const [preset, setPreset] = useState("corto");
   const [modo, setModo] = useState("foco");
   const [segundosRestantes, setSegundosRestantes] = useState(obtenerDuracion("foco", "corto"));
-  const [enMarcha, setEnMarcha] = useState(false); // false = espera a que el usuario pulse Play
+  const [enMarcha, setEnMarcha] = useState(false); // false = espera a que el usuario pulse Iniciar
   const [sesiones, setSesiones] = useState({ foco: 0, descansoCorto: 0, descansoLargo: 0 });
   // Tiempos del preset Personalizado; null hasta que el usuario los guarde por primera vez
   const [tiemposPersonalizados, setTiemposPersonalizados] = useState(null);
@@ -44,7 +44,7 @@ export default function usePomodoro() {
     setModo(siguienteModo);
     setSegundosRestantes(obtenerDuracion(siguienteModo, preset, tiemposPersonalizados));
 
-    // El nuevo modo queda en pausa hasta que el usuario pulse Play
+    // El nuevo modo queda en pausa hasta que el usuario pulse Iniciar
     setEnMarcha(false);
   }, [segundosRestantes]);
 
